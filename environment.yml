@@ -1,0 +1,13 @@
+# environment.yml
+name: dnd_manager_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - faiss-cpu
+  - pip
+  - pip:
+    - python-dotenv
+    - openai
