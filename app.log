@@ -849,3 +849,92 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2024-09-14 20:22:40,066 [INFO] db: Retrieved 15 world building entries.
 2024-09-14 20:22:40,066 [ERROR] ui: Failed to initiate edit: too many values to unpack (expected 3)
 2024-09-14 20:22:46,002 [INFO] db: Database connection closed.
+2024-09-14 20:29:30,618 [INFO] db: Database tables created or verified successfully.
+2024-09-14 20:29:30,618 [INFO] db: Connected to the database successfully.
+2024-09-14 20:29:31,148 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 20:29:31,162 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:29:31,168 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 20:29:31,183 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 20:29:35,657 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:29:36,407 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:29:43,531 [INFO] db: Updated world building entry with ID: 1
+2024-09-14 20:29:45,319 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:29:49,182 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 20:29:49,674 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:49,811 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:50,013 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:50,313 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:50,650 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:50,967 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,139 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,314 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,453 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,627 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,785 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:51,948 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,131 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,260 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,428 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,588 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,753 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,919 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 20:29:52,957 [INFO] chat: FAISS index built and saved successfully.
+2024-09-14 20:29:55,079 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:29:55,871 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:19:16,136 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:02,692 [INFO] db: Updated world building entry with ID: 1
+2024-09-14 21:21:04,736 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:05,559 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 21:21:06,107 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:06,296 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:06,525 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:06,772 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,040 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,331 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,483 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,642 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,802 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:07,917 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,089 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,212 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,370 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,546 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,804 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:08,972 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:09,214 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:09,400 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:21:09,440 [INFO] chat: FAISS index built and saved successfully.
+2024-09-14 21:21:12,114 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:12,954 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:30,051 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:40,133 [INFO] db: Updated world building entry with ID: 1
+2024-09-14 21:21:41,269 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:45,859 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:21:46,620 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:22:51,985 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:22:52,836 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:23:09,610 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:23:42,483 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:23:43,642 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:23:49,882 [INFO] db: Updated world building entry with ID: 12
+2024-09-14 21:23:50,716 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:23:51,494 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 21:23:52,193 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:52,367 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:52,578 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:52,950 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:53,238 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:53,498 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:53,668 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:53,806 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:53,954 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,064 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,223 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,370 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,487 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,636 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,765 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:54,924 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:55,046 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:55,216 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 21:23:55,228 [INFO] chat: FAISS index built and saved successfully.
