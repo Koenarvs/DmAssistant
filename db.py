@@ -66,7 +66,7 @@ class Database:
                 cursor.execute("UPDATE session_notes SET last_updated = CURRENT_TIMESTAMP WHERE last_updated IS NULL")
                 logger.info("Set 'last_updated' for existing 'session_notes' records.")
 
-            # Table for NPCs (already includes 'last_updated')
+            # Table for NPCs (includes 'faction_affiliation')
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS npc (
                     npc_id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -5,13 +5,20 @@ from tkhtmlview import HTMLLabel  # Using tkhtmlview for HTML rendering
 from chat import ChatManager
 from db import Database
 from datetime import datetime
+from npc_generator import generate_npc
 import os
 import markdown
 import logging
+import json  # Added for JSON loading
 from pathlib import Path  # Import pathlib for path handling
 
 # Configure logger for ui.py
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)  # Set to DEBUG for detailed logs
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 class DnDManagerApp:
     """
@@ -34,6 +41,7 @@ class DnDManagerApp:
             return
 
         try:
+            self.load_json_data()
             self.create_widgets()
         except Exception as e:
             logger.error(f"Failed to create widgets: {e}")
@@ -46,6 +54,28 @@ class DnDManagerApp:
         self.world_building_contents = {}
         self.session_notes_contents = {}
         self.npc_details_contents = {}
+
+    def load_json_data(self):
+        """
+        Loads data from the npc_generation_ellium.json file.
+        """
+        try:
+            json_path = 'npc_generation_ellium.json'
+            if not os.path.isfile(json_path):
+                logger.error(f"JSON file '{json_path}' not found.")
+                messagebox.showerror("File Error", f"JSON file '{json_path}' not found.")
+                self.on_closing()
+                return
+
+            with open(json_path, 'r') as file:
+                data = json.load(file)
+            self.factions = [faction["name"] for faction in data.get("factions", [])]
+            logger.info("Factions loaded successfully from JSON.")
+        except Exception as e:
+            logger.error(f"Error loading JSON data: {e}")
+            messagebox.showerror("JSON Error", f"Failed to load JSON data: {e}")
+            self.on_closing()
+            raise
 
     def create_widgets(self):
         """
@@ -588,19 +618,28 @@ class DnDManagerApp:
             self.npc_deity = ttk.Entry(form_frame)
             self.npc_deity.grid(row=15, column=1, sticky='ew', pady=2)
 
+            # Faction
+            ttk.Label(form_frame, text="Faction:").grid(row=16, column=0, sticky='w', pady=2)
+            self.npc_faction = ttk.Entry(form_frame)
+            self.npc_faction.grid(row=16, column=1, sticky='ew', pady=2)
+
             # Image Path
-            ttk.Label(form_frame, text="Image Path:").grid(row=16, column=0, sticky='w', pady=2)
+            ttk.Label(form_frame, text="Image Path:").grid(row=17, column=0, sticky='w', pady=2)
             self.npc_image_path = ttk.Entry(form_frame)
-            self.npc_image_path.grid(row=16, column=1, sticky='ew', pady=2)
+            self.npc_image_path.grid(row=17, column=1, sticky='ew', pady=2)
             browse_button = ttk.Button(form_frame, text="Browse", command=self.browse_image)
-            browse_button.grid(row=16, column=2, sticky='w', pady=2, padx=5)
+            browse_button.grid(row=17, column=2, sticky='w', pady=2, padx=5)
 
             # Configure grid weights
             form_frame.columnconfigure(1, weight=1)
 
+            # Create NPC Button
+            create_npc_button = tk.Button(form_frame, text="Create NPC", command=self.create_npc)
+            create_npc_button.grid(row=18, column=0, sticky='w', pady=10)
+
             # Save NPC Button
             save_npc_button = tk.Button(form_frame, text="Add NPC", command=self.add_npc)
-            save_npc_button.grid(row=17, column=1, sticky='e', pady=10)
+            save_npc_button.grid(row=18, column=1, sticky='e', pady=10)
 
             # Separator
             separator = ttk.Separator(self.npc_tab, orient='horizontal')
@@ -633,6 +672,77 @@ class DnDManagerApp:
             logger.error(f"Error creating NPC Management Tab: {e}")
             raise
 
+    def create_npc(self):
+        """
+        Generates a random NPC and populates the form fields for further editing.
+        """
+        try:
+            npc = generate_npc()
+
+            # Populate form fields with generated data
+            self.npc_name.delete(0, tk.END)
+            self.npc_name.insert(0, npc.get('name', ''))
+
+            self.npc_race.delete(0, tk.END)
+            self.npc_race.insert(0, npc.get('race', ''))
+
+            self.npc_class.delete(0, tk.END)
+            self.npc_class.insert(0, npc.get('class', ''))
+
+            self.npc_gender.delete(0, tk.END)
+            self.npc_gender.insert(0, npc.get('gender', ''))
+
+            self.npc_age.delete(0, tk.END)
+            self.npc_age.insert(0, npc.get('age', ''))
+
+            self.npc_appearance.delete("1.0", tk.END)
+            self.npc_appearance.insert(tk.END, npc.get('appearance', ''))
+
+            self.npc_background.delete("1.0", tk.END)
+            self.npc_background.insert(tk.END, npc.get('background', ''))
+
+            self.npc_languages.delete(0, tk.END)
+            self.npc_languages.insert(0, npc.get('languages', ''))
+
+            self.npc_personality.delete("1.0", tk.END)
+            self.npc_personality.insert(tk.END, npc.get('personality_traits', ''))
+
+            self.npc_ideals.delete("1.0", tk.END)
+            self.npc_ideals.insert(tk.END, npc.get('ideals', ''))
+
+            self.npc_bonds.delete("1.0", tk.END)
+            self.npc_bonds.insert(tk.END, npc.get('bonds', ''))
+
+            self.npc_flaws.delete("1.0", tk.END)
+            self.npc_flaws.insert(tk.END, npc.get('flaws', ''))
+
+            self.npc_backstory.delete("1.0", tk.END)
+            self.npc_backstory.insert(tk.END, npc.get('backstory', ''))
+
+            self.npc_role.delete(0, tk.END)
+            self.npc_role.insert(0, npc.get('role_in_world', ''))
+
+            self.npc_alignment.delete(0, tk.END)
+            self.npc_alignment.insert(0, npc.get('alignment', ''))
+
+            self.npc_deity.delete(0, tk.END)
+            self.npc_deity.insert(0, npc.get('deity_aspect', ''))
+
+            # Faction as a text field
+            faction = npc.get('faction', 'None')
+            if faction not in self.factions:
+                faction = "None"
+            self.npc_faction.delete(0, tk.END)
+            self.npc_faction.insert(0, faction)
+
+            self.npc_image_path.delete(0, tk.END)
+            self.npc_image_path.insert(0, npc.get('image_path', ''))
+
+            messagebox.showinfo("NPC Created", "A new NPC has been generated. You can edit the details before saving.")
+        except Exception as e:
+            logger.error(f"Failed to create NPC: {e}")
+            messagebox.showerror("Error", f"Failed to create NPC: {str(e)}")
+
     def browse_image(self):
         """
         Opens a file dialog to select an image for the NPC.
@@ -659,7 +769,7 @@ class DnDManagerApp:
                 'race': self.npc_race.get(),
                 'class': self.npc_class.get(),
                 'gender': self.npc_gender.get(),
-                'age': self.npc_age.get(),
+                'age': int(self.npc_age.get()) if self.npc_age.get().isdigit() else None,
                 'appearance': self.npc_appearance.get("1.0", tk.END).strip(),
                 'background': self.npc_background.get("1.0", tk.END).strip(),
                 'languages': self.npc_languages.get(),
@@ -671,6 +781,7 @@ class DnDManagerApp:
                 'role_in_world': self.npc_role.get(),
                 'alignment': self.npc_alignment.get(),
                 'deity': self.npc_deity.get(),
+                'faction_affiliation': self.npc_faction.get(),
                 'image_path': self.npc_image_path.get(),
                 # Dynamic Information can be added here as needed
             }
@@ -681,7 +792,7 @@ class DnDManagerApp:
                 return
 
             # Validate age is numeric
-            if npc_data['age'] and not npc_data['age'].isdigit():
+            if npc_data['age'] is None:
                 messagebox.showwarning("Input Error", "Age must be a number.")
                 return
 
@@ -717,6 +828,8 @@ class DnDManagerApp:
             self.npc_role.delete(0, tk.END)
             self.npc_alignment.delete(0, tk.END)
             self.npc_deity.delete(0, tk.END)
+            self.npc_faction.delete(0, tk.END)
+            self.npc_faction.insert(0, "None")
             self.npc_image_path.delete(0, tk.END)
         except Exception as e:
             logger.error(f"Error clearing NPC form: {e}")
@@ -784,6 +897,9 @@ class DnDManagerApp:
                     npc_info += f"**{field}:** ![]({image_url})\n\n"
                 else:
                     npc_info += f"**{field}:** {value}\n\n"
+            elif field == "Faction Affiliation":
+                # Display faction affiliation
+                npc_info += f"**{field}:** {value}\n\n"
             else:
                 npc_info += f"**{field}:** {value}\n\n"
         return npc_info
@@ -814,3 +930,21 @@ class DnDManagerApp:
         except Exception as e:
             logger.error(f"Failed to rebuild FAISS index: {e}")
             messagebox.showerror("Error", f"Failed to rebuild FAISS index: {e}")
+
+
+# Example usage
+if __name__ == "__main__":
+    import sys
+
+    # Ensure that the script is run with the necessary arguments
+    if len(sys.argv) != 2:
+        print("Usage: python ui.py <OpenAI_API_Key>")
+        sys.exit(1)
+
+    api_key = sys.argv[1]
+
+    root = tk.Tk()
+    db = Database()
+    app = DnDManagerApp(root, db, api_key)
+    root.protocol("WM_DELETE_WINDOW", app.on_closing)
+    root.mainloop()

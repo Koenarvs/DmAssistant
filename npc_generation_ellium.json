@@ -1,0 +1,416 @@
+{
+    "classes_subclasses": {
+      "Barbarian": {
+        "Ancestral Guardian": ["Elf"],
+        "Totem Warrior": ["Halfelf", "Elf"]
+      },
+      "Cleric": {
+        "Domain of Knowledge": ["Tabaxi"],
+        "Domain of Light": ["Human", "Tabaxi"],
+        "Domain of Order": ["Dwarf", "Tabaxi"],
+        "Domain of Peace": ["Human", "Halfelf", "Dwarf", "Tabaxi"],
+        "Domain of Twilight": ["Tabaxi"]
+      },
+      "Druid": {
+        "Circle of the Moon": ["Elf"],
+        "Circle of the Stars": ["Halfelf", "Elf"]
+      },
+      "Fighter": {
+        "Battle Master": ["Tabaxi"],
+        "Champion": ["Human", "Halfelf", "Dwarf"],
+        "Monster Hunter": ["Dwarf", "Elf"],
+        "Sharpshooter": ["Human", "Halfelf", "Elf"]
+      },
+      "Monk": {
+        "Way of Shadow": ["Dwarf"]
+      },
+      "Rogue": {
+        "Assassin Archetype": ["Dwarf"],
+        "Inquisitive Archetype": ["Elf", "Tabaxi"],
+        "Thief Archetype": ["Human", "Halfelf", "Dwarf", "Elf"]
+      },
+      "Wizard": {
+        "Arcane Tradition of Invention": ["Human", "Halfelf", "Tabaxi"],
+        "Arcane Tradition of Lore Mastery": ["Human", "Halfelf", "Tabaxi"],
+        "Arcane Tradition of Onomancy": ["Human", "Tabaxi"],
+        "Arcane Tradition of Theurgy": ["Halfelf"],
+        "Arcane Tradition of Psionics": ["Dwarf"]
+      }
+    },
+    "backgrounds_traits": {
+      "Acolyte": {
+        "personality_traits": [
+          "I idolize a particular hero of my faith.",
+          "I can find common ground between the fiercest enemies.",
+          "I see omens in every event and action."
+        ],
+        "ideals": "Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld. (Lawful)",
+        "bonds": "I owe my life to the priest who took me in when my parents died.",
+        "flaws": "I judge others harshly, and myself even more severely."
+      },
+      "Criminal": {
+        "personality_traits": [
+          "I always have a plan for what to do when things go wrong.",
+          "I am always calm, no matter what the situation.",
+          "I am incredibly slow to trust."
+        ],
+        "ideals": "Honor. I don't steal from others in the trade.",
+        "bonds": "Someone I loved died because of a mistake I made.",
+        "flaws": "When I see something valuable, I can't think about anything but how to steal it."
+      },
+      "Folk Hero": {
+        "personality_traits": [
+          "I judge people by their actions, not their words.",
+          "If someone is in trouble, I'm always ready to lend help.",
+          "When I set my mind to something, I follow through no matter what."
+        ],
+        "ideals": "Respect. People deserve to be treated with dignity and respect. (Good)",
+        "bonds": "I protect those who cannot protect themselves.",
+        "flaws": "I'm convinced of the significance of my destiny, and blind to my shortcomings."
+      },
+      "Noble": {
+        "personality_traits": [
+          "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
+          "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+          "I take great pains to always look my best and follow the latest fashions."
+        ],
+        "ideals": "Responsibility. It is my duty to respect the authority of those above me.",
+        "bonds": "I will face any challenge to win the approval of my family.",
+        "flaws": "I secretly believe that everyone is beneath me."
+      },
+      "Sage": {
+        "personality_traits": [
+          "I use polysyllabic words that convey the impression of great erudition.",
+          "I've read every book in the world's greatest libraries—or I like to boast that I have.",
+          "I'm used to helping out those who aren't as smart as I am."
+        ],
+        "ideals": "Knowledge. The path to power and self-improvement is through knowledge. (Neutral)",
+        "bonds": "It is my duty to protect my students.",
+        "flaws": "I am easily distracted by the promise of information."
+      },
+      "Soldier": {
+        "personality_traits": [
+          "I can stare down a hell hound without flinching.",
+          "I enjoy being strong and like breaking things.",
+          "I am haunted by memories of war."
+        ],
+        "ideals": "Greater Good. It is each person's responsibility to make the world a better place.",
+        "bonds": "Those who fight beside me are those worth dying for.",
+        "flaws": "I made a terrible mistake in battle that cost many lives."
+      },
+      "Entertainer": {
+        "personality_traits": [
+          "I know a story relevant to almost every situation.",
+          "I can find common ground between the fiercest enemies.",
+          "I love a good insult, even one directed at me."
+        ],
+        "ideals": "Beauty. When I perform, I make the world better than it was. (Good)",
+        "bonds": "Someone stole my precious instrument, and someday I'll get it back.",
+        "flaws": "I'll do anything to win fame and renown."
+      },
+      "Hermit": {
+        "personality_traits": [
+          "I've been isolated for so long that I rarely speak.",
+          "I am utterly serene, even in the face of disaster.",
+          "I feel tremendous empathy for all who suffer."
+        ],
+        "ideals": "Self-Knowledge. If you know yourself, there's nothing left to know. (Any)",
+        "bonds": "Nothing is more important than the other members of my hermitage.",
+        "flaws": "I harbor dark, bloodthirsty thoughts that my isolation failed to quell."
+      },
+      "Guild Artisan": {
+        "personality_traits": [
+          "I believe that anything worth doing is worth doing right.",
+          "I idolize a hero of my guild who taught me everything I know.",
+          "I’m horribly jealous of anyone who can outshine my handiwork."
+        ],
+        "ideals": "Community. It is the duty of all civilized people to strengthen the bonds of community.",
+        "bonds": "I owe my guild a great debt for forging me into the person I am today.",
+        "flaws": "I can't keep a secret to save my life, or anyone else's."
+      },
+      "Outlander": {
+        "personality_traits": [
+          "I am driven by a wanderlust that led me away from home.",
+          "I watch over my friends as if they were a family.",
+          "I feel far more comfortable around animals than people."
+        ],
+        "ideals": "Freedom. The sea, the mountains, and the sky are free for the taking.",
+        "bonds": "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
+        "flaws": "I am slow to trust members of other races, tribes, and societies."
+      }
+    },
+    "background_info_default": {
+      "personality_traits": [
+        "I have a strong sense of justice.",
+        "I love exploring new places.",
+        "I enjoy telling stories."
+      ],
+      "ideals": "Freedom. The open road is calling to me. (Chaotic)",
+      "bonds": "I will do anything to protect the people I care about.",
+      "flaws": "I am quick to anger and easily provoked."
+    },
+    "appearance_traits": [
+      "Distinctive jewelry",
+      "Piercings",
+      "Flamboyant clothes",
+      "Formal attire",
+      "Ragged clothes",
+      "Pronounced scar",
+      "Missing teeth",
+      "Unusual eye color",
+      "Tattoos",
+      "Bald",
+      "Braided hair",
+      "Unusual hair color",
+      "Distinctive posture",
+      "Exceptional beauty",
+      "Unusual skin color",
+      "Missing fingers",
+      "Nervous eye twitch"
+    ],
+    "languages": [
+      "Common",
+      "Elvish",
+      "Dwarvish",
+      "Draconic",
+      "Celestial",
+      "Infernal",
+      "Sylvan"
+    ],
+    "backstories": {
+      "Acolyte": "Raised in a secluded monastery, I dedicated my life to serving my deity.",
+      "Criminal": "I grew up on the streets, learning to survive by any means necessary.",
+      "Folk Hero": "I stood up against a tyrant in my village and became a local legend.",
+      "Noble": "Born into a wealthy family, I was groomed for leadership and diplomacy.",
+      "Sage": "I spent years studying ancient texts and uncovering forgotten knowledge.",
+      "Soldier": "I served in the king's army, fighting bravely in numerous battles.",
+      "Entertainer": "I traveled from town to town, performing and captivating audiences.",
+      "Hermit": "I withdrew from society to seek spiritual enlightenment.",
+      "Guild Artisan": "I honed my craft in the city, contributing to my guild's prosperity.",
+      "Outlander": "I wandered the wilderness, forging a life away from civilization."
+    },
+    "roles_in_world": [
+      "Merchant who trades rare goods",
+      "Guard protecting the city gates",
+      "Healer who aids the wounded",
+      "Scholar researching ancient artifacts",
+      "Blacksmith crafting weapons and armor",
+      "Bard who tells tales of heroism",
+      "Priest serving the local deity",
+      "Explorer mapping uncharted territories",
+      "Spy gathering information for a faction",
+      "Innkeeper managing a busy tavern"
+    ],
+    "deities": {
+      "Zynthar": {
+        "title": "the Eternal Flame",
+        "alignment": "Neutral",
+        "aspects": ["Creation", "Balance"],
+        "description": "Zynthar embodies the perfect balance of order and chaos, the endless cycle of creation and destruction."
+      },
+      "Vraktar": {
+        "title": "the Ember of Order",
+        "alignment": "Lawful",
+        "aspects": [
+          "Tezca (Light, Creation)",
+          "Qotal (Knowledge, Arcana)",
+          "Mahuiz (Zeal, Order)",
+          "Ilhui (Fate, Destiny)",
+          "Nezca (Peace, Solidarity)",
+          "Achic (War, Ambition)",
+          "Tlatol (Nature, Forge)",
+          "Tlanel (Psionic Prowess)",
+          "Zaborim (Knowledge, Arcana)",
+          "Vragul (Community, Zeal)",
+          "Tlacue (Vengeful Memory)",
+          "Ellyr (Nature's Order)",
+          "Chipa (Life, Community)",
+          "Ixtla (Grave, Law)",
+          "Hueya (Strength, Honor)",
+          "Azul (Sky, Heavens)"
+        ],
+        "description": "Vraktar seeks to impose structure and stability, creating the immutable laws that govern the cosmos."
+      },
+      "Khaloth": {
+        "title": "the Spark of Chaos",
+        "alignment": "Chaotic",
+        "aspects": [
+          "Kulkul (Twilight, Duality)",
+          "Khaloth (Arcana)",
+          "Zolkar (Death)",
+          "Ixcue (Forge, Destruction)",
+          "Nemi (Nature, Tempest)",
+          "Chichi (Tempest)",
+          "Tlahue (Trickery, Madness)",
+          "Azarna (War)",
+          "Meztli (Moon, Twilight)",
+          "Yaocuix (War, Strength)",
+          "Mozca (Ambition)",
+          "Tlapal (Destruction, Grave)",
+          "Centzu (Void, Death)",
+          "Ahahui (Luck, Trickery)",
+          "Yaocal (Shadow's Path)",
+          "Urgur (Nature's Chaos)"
+        ],
+        "description": "Khaloth revels in the unpredictable and the ever-changing, introducing flux and transformation wherever it goes."
+      },
+      "Sardior": {
+        "title": "the Balanced Blaze",
+        "alignment": "Neutral",
+        "aspects": [
+          "Yyol (Peace)",
+          "Yancuic (Life, Death)",
+          "Matlac (Knowledge)",
+          "Nemihu (Life, Grave)",
+          "Tonalli (Light)",
+          "Tlanel (Solidarity, Community)",
+          "Icnoyotl (Ambition, Zeal)",
+          "Ometi (Arcana, Order)",
+          "Tlachi (Forge, Destruction)",
+          "Micca (Grave, Moon)",
+          "Cahuitla (Time, Fate)",
+          "Nepantla (Balance)",
+          "Ergos (Moon, Arcana)",
+          "Seldor (Knowledge)",
+          "Rul'nal (Fate's Guidance)",
+          "Nirva (Life's Creation)",
+          "Chihua (Strength, Nature)",
+          "Halthur (Nature's Balance)",
+          "Ixachi (War, Honor)",
+          "Plutoq (Stars)"
+        ],
+        "description": "Sardior seeks to maintain the equilibrium that Zynthar once represented, striving for balance between order and chaos."
+      },
+      "Other Deities": {
+        "None": {
+          "description": "No deity worshiped."
+        },
+        "Torm": {
+          "title": "the Loyal Fury",
+          "alignment": "Lawful Good",
+          "aspects": ["Courage", "Duty", "Obedience"],
+          "description": "Torm is the deity of courage and self-sacrifice."
+        },
+        "Lolth": {
+          "title": "the Queen of Spiders",
+          "alignment": "Chaotic Evil",
+          "aspects": ["Deception", "Ambition", "Darkness"],
+          "description": "Lolth is the deity of deceit and ambition, often worshiped by drow."
+        },
+        "Bahamut": {
+          "title": "the Platinum Dragon",
+          "alignment": "Lawful Good",
+          "aspects": ["Justice", "Honor", "Nobility"],
+          "description": "Bahamut is the deity of justice and nobility, revered by paladins and righteous warriors."
+        },
+        "Mystra": {
+          "title": "the Lady of Mysteries",
+          "alignment": "Neutral Good",
+          "aspects": ["Magic", "Knowledge", "Arcana"],
+          "description": "Mystra governs the Weave of magic, guiding mages and sorcerers."
+        },
+        "Selûne": {
+          "title": "the Moonmaiden",
+          "alignment": "Chaotic Good",
+          "aspects": ["Moon", "Navigation", "Protection"],
+          "description": "Selûne is the goddess of the moon and navigation, offering protection to travelers."
+        },
+        "Moradin": {
+          "title": "the All-Hammer",
+          "alignment": "Lawful Good",
+          "aspects": ["Creation", "Dwarves", "Craftsmanship"],
+          "description": "Moradin is the chief deity of dwarves, embodying creation and craftsmanship."
+        },
+        "Kord": {
+          "title": "the Stormlord",
+          "alignment": "Chaotic Good",
+          "aspects": ["Strength", "Storms", "Valor"],
+          "description": "Kord is the god of strength and storms, inspiring warriors and athletes."
+        },
+        "Tempus": {
+          "title": "the Lord of Battles",
+          "alignment": "Chaotic Neutral",
+          "aspects": ["War", "Heroism", "Tactics"],
+          "description": "Tempus is the deity of war and heroism, revered by soldiers and tacticians."
+        },
+        "Sune": {
+          "title": "the Lady of Love",
+          "alignment": "Chaotic Good",
+          "aspects": ["Love", "Beauty", "Passion"],
+          "description": "Sune is the goddess of love and beauty, inspiring artists and lovers."
+        }
+      }
+    },
+    "factions": [
+      {
+        "name": "The Circle of the Endless Journey",
+        "philosophy": "Represents the chaotic counter-culture within Tabaxi society",
+        "goals": "To disrupt the status quo and promote freedom, innovation, and personal growth through chaos and change",
+        "notable_characteristics": "Interprets stars in unique ways, challenges rigid societal structures"
+      },
+      {
+        "name": "The Blade Guard",
+        "philosophy": "Elite military order sworn to protect the Emperor and uphold the values of the Tabaxus Imperium",
+        "goals": "Protect the Emperor, uphold imperial values, train the next generation of Blade Guards",
+        "notable_characteristics": "Known for exceptional swordsmanship and unwavering loyalty"
+      },
+      {
+        "name": "The Syndicate",
+        "philosophy": "Powerful faction of traders, artisans, and entrepreneurs from various races",
+        "goals": "Dominate the commercial landscape, use wealth to influence political decisions, expand trade networks",
+        "notable_characteristics": "Controls much of the commerce within the Tabaxus Imperium"
+      },
+      {
+        "name": "The Sylvan Glade",
+        "philosophy": "Faction of Elven druids deeply connected to nature",
+        "goals": "Protect wilderness, communicate with land spirits, maintain natural balance",
+        "notable_characteristics": "Acts as voice of the wild and guardians of nature"
+      },
+      {
+        "name": "The Verdant Vanguard",
+        "philosophy": "Group of Elves dedicated to rediscovering and preserving lost knowledge of their ancestors",
+        "goals": "Locate ancient Elven ruins, recover lost artifacts and texts, preserve rediscovered knowledge",
+        "notable_characteristics": "Searches for ways to reconnect with their arcane heritage"
+      },
+      {
+        "name": "The Celestial Court",
+        "philosophy": "Faction of Tabaxi priests, astrologers, and seers who interpret celestial movements",
+        "goals": "Provide guidance to the Tabaxus Imperium based on celestial signs, expand their influence",
+        "notable_characteristics": "Deeply respected by Tabaxi, wields significant influence in the empire"
+      },
+      {
+        "name": "The Order of the Whispering Paws",
+        "philosophy": "Embodies principles of law, order, and destiny within Tabaxi culture",
+        "goals": "Uphold and enforce laws of Ellium, ensure peace and stability through adherence to cosmic order",
+        "notable_characteristics": "Strong ties to governmental bodies, acts as advisors, judges, and enforcers"
+      },
+      {
+        "name": "The Crimson Compass",
+        "philosophy": "Group of Human adventurers, explorers, and treasure hunters supporting each other",
+        "goals": "Provide support for Human adventurers, take on lucrative jobs, explore ruins and uncover treasures",
+        "notable_characteristics": "Known for adaptability and resourcefulness"
+      },
+      {
+        "name": "The Blazing Scales",
+        "philosophy": "Secretive faction of scholars who have uncovered fragments of truth about the gods",
+        "goals": "Maintain balance between order and chaos, gather knowledge about the true nature of the gods",
+        "notable_characteristics": "Works behind the scenes to prevent imbalance in cosmic forces"
+      },
+      {
+        "name": "The Adamantine Assembly",
+        "philosophy": "Secretive organization of Dwarves practicing shadow magic and psionic abilities",
+        "goals": "Protect Dwarven interests, gather intelligence, manipulate events from the shadows",
+        "notable_characteristics": "Operates in secrecy, uses combination of shadow magic and psionics"
+      },
+      {
+        "name": "The Whispering Quill Society",
+        "philosophy": "Network of individuals with innate magical abilities or rediscovered arcane knowledge",
+        "goals": "Provide safe haven for magic users, protect members from persecution, advance understanding of magic",
+        "notable_characteristics": "Operates in secret, supports and protects magic users in a world that fears their abilities"
+      }
+    ],
+    "alignments": [
+      "N/A"
+    ]
+  }
+  

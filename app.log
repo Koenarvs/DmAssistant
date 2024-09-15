@@ -938,3 +938,75 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2024-09-14 21:23:55,046 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2024-09-14 21:23:55,216 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2024-09-14 21:23:55,228 [INFO] chat: FAISS index built and saved successfully.
+2024-09-14 21:55:00,478 [INFO] db: Database connection closed.
+2024-09-14 21:55:06,966 [INFO] db: Database tables created or verified successfully.
+2024-09-14 21:55:06,966 [INFO] db: Connected to the database successfully.
+2024-09-14 21:55:07,516 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 21:55:07,530 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 21:55:07,537 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 21:55:07,554 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:19:23,081 [INFO] db: Database connection closed.
+2024-09-14 22:21:00,210 [INFO] db: Database tables created or verified successfully.
+2024-09-14 22:21:00,210 [INFO] db: Connected to the database successfully.
+2024-09-14 22:21:00,753 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 22:21:00,767 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:21:00,774 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 22:21:00,791 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:21:05,625 [ERROR] ui: Failed to create NPC: cannot unpack non-iterable NoneType object
+2024-09-14 22:28:09,587 [INFO] db: Database connection closed.
+2024-09-14 22:28:14,978 [INFO] db: Database tables created or verified successfully.
+2024-09-14 22:28:14,978 [INFO] db: Connected to the database successfully.
+2024-09-14 22:28:15,538 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 22:28:15,552 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:28:15,558 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 22:28:15,574 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:28:28,375 [INFO] db: Database connection closed.
+2024-09-14 22:29:04,392 [INFO] db: Database tables created or verified successfully.
+2024-09-14 22:29:04,392 [INFO] db: Connected to the database successfully.
+2024-09-14 22:29:04,933 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 22:29:04,946 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:29:04,952 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 22:29:04,966 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:29:16,400 [INFO] db: Database connection closed.
+2024-09-14 22:31:28,985 [INFO] db: Database tables created or verified successfully.
+2024-09-14 22:31:28,985 [INFO] db: Connected to the database successfully.
+2024-09-14 22:31:29,525 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 22:31:29,539 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:31:29,545 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 22:31:29,560 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:31:34,966 [ERROR] ui: Failed to create NPC: cannot unpack non-iterable NoneType object
+2024-09-14 22:31:50,715 [INFO] db: Database connection closed.
+2024-09-14 22:34:55,491 [INFO] db: Database tables created or verified successfully.
+2024-09-14 22:34:55,491 [INFO] db: Connected to the database successfully.
+2024-09-14 22:34:56,044 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 22:34:56,057 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:34:56,063 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 22:34:56,077 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 22:43:36,128 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:42,426 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:42,954 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:43,409 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:43,871 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:44,370 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:45,053 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:45,467 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:46,548 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 22:43:47,347 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 23:57:11,401 [INFO] db: Database connection closed.
+2024-09-15 00:26:44,582 [INFO] db: Database tables created or verified successfully.
+2024-09-15 00:26:44,582 [INFO] db: Connected to the database successfully.
+2024-09-15 00:26:45,145 [INFO] chat: FAISS index loaded successfully.
+2024-09-15 00:26:45,146 [INFO] ui: Factions loaded successfully from JSON.
+2024-09-15 00:26:45,161 [INFO] db: Retrieved 15 world building entries.
+2024-09-15 00:26:45,168 [INFO] db: Retrieved 0 session notes entries.
+2024-09-15 00:26:45,185 [INFO] db: Retrieved 0 NPC entries.
+2024-09-15 00:27:08,300 [INFO] db: Retrieved 15 world building entries.
+2024-09-15 00:28:07,613 [INFO] db: Database connection closed.
+2024-09-15 00:44:54,790 [INFO] db: Database tables created or verified successfully.
+2024-09-15 00:44:54,790 [INFO] db: Connected to the database successfully.
+2024-09-15 00:44:55,357 [INFO] chat: FAISS index loaded successfully.
+2024-09-15 00:44:55,358 [INFO] ui: Factions loaded successfully from JSON.
+2024-09-15 00:44:55,372 [INFO] db: Retrieved 15 world building entries.
+2024-09-15 00:44:55,377 [INFO] db: Retrieved 0 session notes entries.
+2024-09-15 00:44:55,392 [INFO] db: Retrieved 0 NPC entries.
+2024-09-15 00:45:01,999 [INFO] db: Database connection closed.
