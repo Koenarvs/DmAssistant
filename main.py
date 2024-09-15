@@ -43,7 +43,7 @@ def main():
 
     # Initialize Tkinter Root
     root = tk.Tk()
-    app = DnDManagerApp(root, db)
+    app = DnDManagerApp(root, db, openai_api_key)  # Pass API key here
     root.protocol("WM_DELETE_WINDOW", app.on_closing)
     root.mainloop()
 

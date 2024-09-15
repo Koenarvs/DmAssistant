@@ -1,0 +1,851 @@
+2024-09-13 21:03:26,364 [INFO] db: Database tables created or verified successfully.
+2024-09-13 21:03:26,364 [INFO] db: Connected to the database successfully.
+2024-09-13 21:03:26,521 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-13 21:03:26,522 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:03:26,522 [WARNING] chat: No records found to build FAISS index.
+2024-09-13 21:03:26,529 [INFO] db: Retrieved 0 world building entries.
+2024-09-13 21:03:26,530 [INFO] db: Retrieved 0 session notes entries.
+2024-09-13 21:03:26,542 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:10:37,022 [INFO] db: Database connection closed.
+2024-09-13 21:12:58,050 [INFO] db: Database tables created or verified successfully.
+2024-09-13 21:12:58,051 [INFO] db: Connected to the database successfully.
+2024-09-13 21:12:58,215 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-13 21:12:58,215 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:12:58,216 [WARNING] chat: No records found to build FAISS index.
+2024-09-13 21:12:58,225 [INFO] db: Retrieved 0 world building entries.
+2024-09-13 21:12:58,229 [INFO] db: Retrieved 0 session notes entries.
+2024-09-13 21:12:58,248 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:13:27,334 [INFO] db: Added world building entry: Ellium: A Brief History
+2024-09-13 21:17:12,225 [INFO] db: Database connection closed.
+2024-09-13 21:17:49,680 [INFO] db: Database tables created or verified successfully.
+2024-09-13 21:17:49,681 [INFO] db: Connected to the database successfully.
+2024-09-13 21:17:49,823 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-13 21:17:49,823 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:17:49,824 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:17:49,824 [WARNING] chat: No records found to build FAISS index.
+2024-09-13 21:17:49,832 [INFO] db: Retrieved 1 world building entries.
+2024-09-13 21:17:49,836 [INFO] db: Retrieved 0 session notes entries.
+2024-09-13 21:17:49,850 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:21:50,514 [INFO] db: Database connection closed.
+2024-09-13 21:22:39,969 [INFO] db: Database tables created or verified successfully.
+2024-09-13 21:22:39,969 [INFO] db: Connected to the database successfully.
+2024-09-13 21:22:40,115 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-13 21:22:40,116 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:22:40,116 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:22:40,116 [WARNING] chat: No records found to build FAISS index.
+2024-09-13 21:22:40,126 [INFO] db: Retrieved 1 world building entries.
+2024-09-13 21:22:40,129 [INFO] db: Retrieved 0 session notes entries.
+2024-09-13 21:22:40,145 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 21:22:45,573 [INFO] db: Retrieved 1 world building entries.
+2024-09-13 21:28:20,646 [INFO] db: Added world building entry: Ellium: A World in Transition
+2024-09-13 21:28:23,018 [INFO] db: Retrieved record from world_building with ID: 2
+2024-09-13 21:28:23,018 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:28:23,019 [INFO] db: Retrieved 2 world building entries.
+2024-09-13 21:29:43,823 [INFO] db: Added world building entry: Ellium: Deity Compendium
+2024-09-13 21:29:45,614 [INFO] db: Retrieved record from world_building with ID: 3
+2024-09-13 21:29:45,614 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:29:45,615 [INFO] db: Retrieved 3 world building entries.
+2024-09-13 21:30:05,336 [INFO] db: Retrieved 3 world building entries.
+2024-09-13 21:30:06,348 [INFO] db: Retrieved 3 world building entries.
+2024-09-13 21:30:06,979 [INFO] db: Retrieved 3 world building entries.
+2024-09-13 21:30:22,424 [INFO] db: Added world building entry: Ellium: Governance and Politics
+2024-09-13 21:30:24,107 [INFO] db: Retrieved record from world_building with ID: 4
+2024-09-13 21:30:24,107 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:30:24,108 [INFO] db: Retrieved 4 world building entries.
+2024-09-13 21:34:14,525 [INFO] db: Added world building entry: Faction: The Crimson Compass
+2024-09-13 21:34:16,351 [INFO] db: Retrieved record from world_building with ID: 5
+2024-09-13 21:34:16,351 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:34:16,351 [INFO] db: Retrieved 5 world building entries.
+2024-09-13 21:34:41,496 [INFO] db: Added world building entry: Faction: The Blazing Scales
+2024-09-13 21:34:42,774 [INFO] db: Retrieved record from world_building with ID: 6
+2024-09-13 21:34:42,774 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:34:42,775 [INFO] db: Retrieved 6 world building entries.
+2024-09-13 21:35:06,742 [INFO] db: Added world building entry: Faction: The Adamantine Assembly
+2024-09-13 21:35:08,864 [INFO] db: Retrieved record from world_building with ID: 7
+2024-09-13 21:35:08,864 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:35:08,865 [INFO] db: Retrieved 7 world building entries.
+2024-09-13 21:35:44,098 [INFO] db: Added world building entry: Faction: The Sylvan Glade
+2024-09-13 21:35:45,729 [INFO] db: Retrieved record from world_building with ID: 8
+2024-09-13 21:35:45,729 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:35:45,729 [INFO] db: Retrieved 8 world building entries.
+2024-09-13 21:36:14,268 [INFO] db: Added world building entry: Faction: The Syndicate
+2024-09-13 21:36:15,878 [INFO] db: Retrieved record from world_building with ID: 9
+2024-09-13 21:36:15,878 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:36:15,879 [INFO] db: Retrieved 9 world building entries.
+2024-09-13 21:36:51,431 [INFO] db: Added world building entry: Faction: The Celestial Court
+2024-09-13 21:36:52,887 [INFO] db: Retrieved record from world_building with ID: 10
+2024-09-13 21:36:52,888 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:36:52,889 [INFO] db: Retrieved 10 world building entries.
+2024-09-13 21:37:24,040 [INFO] db: Added world building entry: Faction: The Verdant Vanguard
+2024-09-13 21:37:25,863 [INFO] db: Retrieved record from world_building with ID: 11
+2024-09-13 21:37:25,864 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:37:25,864 [INFO] db: Retrieved 11 world building entries.
+2024-09-13 21:37:47,478 [INFO] db: Added world building entry: Faction:  The Blade Guard
+2024-09-13 21:37:49,878 [INFO] db: Retrieved record from world_building with ID: 12
+2024-09-13 21:37:49,878 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:37:49,878 [INFO] db: Retrieved 12 world building entries.
+2024-09-13 21:38:15,695 [INFO] db: Added world building entry: Faction: The Circle of the Endless Journey
+2024-09-13 21:38:17,849 [INFO] db: Retrieved record from world_building with ID: 13
+2024-09-13 21:38:17,849 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:38:17,850 [INFO] db: Retrieved 13 world building entries.
+2024-09-13 21:38:40,483 [INFO] db: Added world building entry: Faction: The Whispering Quill Society
+2024-09-13 21:38:42,091 [INFO] db: Retrieved record from world_building with ID: 14
+2024-09-13 21:38:42,092 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:38:42,092 [INFO] db: Retrieved 14 world building entries.
+2024-09-13 21:39:04,117 [INFO] db: Added world building entry: Faction: The Order of the Whispering Paws
+
+2024-09-13 21:39:05,867 [INFO] db: Retrieved record from world_building with ID: 15
+2024-09-13 21:39:05,867 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:39:05,869 [INFO] db: Retrieved 15 world building entries.
+2024-09-13 21:39:49,107 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:39:49,107 [WARNING] chat: No embedding found for the query.
+2024-09-13 21:39:49,107 [ERROR] chat: Error generating response: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 21:42:59,735 [INFO] db: Database connection closed.
+2024-09-13 22:00:03,406 [INFO] db: Database tables created or verified successfully.
+2024-09-13 22:00:03,407 [INFO] db: Connected to the database successfully.
+2024-09-13 22:00:03,558 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-13 22:00:03,559 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 22:00:03,559 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,560 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,561 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,562 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:03,562 [WARNING] chat: No records found to build FAISS index.
+2024-09-13 22:00:03,570 [INFO] db: Retrieved 15 world building entries.
+2024-09-13 22:00:03,574 [INFO] db: Retrieved 0 session notes entries.
+2024-09-13 22:00:03,588 [INFO] db: Retrieved 0 NPC entries.
+2024-09-13 22:00:25,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-13 22:00:25,699 [WARNING] chat: No embedding found for the query.
+2024-09-13 22:00:25,699 [ERROR] chat: Error generating response: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,542 [INFO] db: Database tables created or verified successfully.
+2024-09-14 00:22:27,542 [INFO] db: Connected to the database successfully.
+2024-09-14 00:22:27,696 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-14 00:22:27,697 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 00:22:27,697 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,697 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,698 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,698 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,698 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,698 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,698 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,699 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,700 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,700 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:27,700 [WARNING] chat: No records found to build FAISS index.
+2024-09-14 00:22:27,708 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 00:22:27,712 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 00:22:27,727 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 00:22:46,866 [ERROR] chat: Error generating embedding: 
+
+You tried to access openai.Embedding, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:22:46,867 [WARNING] chat: No embedding found for the query.
+2024-09-14 00:22:46,867 [ERROR] chat: Error generating response: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2024-09-14 00:23:03,441 [INFO] db: Database connection closed.
+2024-09-14 00:23:14,279 [INFO] db: Database tables created or verified successfully.
+2024-09-14 00:23:14,279 [INFO] db: Connected to the database successfully.
+2024-09-14 00:28:20,418 [INFO] db: Database tables created or verified successfully.
+2024-09-14 00:28:20,419 [INFO] db: Connected to the database successfully.
+2024-09-14 00:28:20,784 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-14 00:28:20,785 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 00:28:21,826 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:21,869 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:22,104 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:22,133 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:22,465 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2024-09-14 00:28:22,467 [ERROR] chat: Error generating embedding: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 21116 tokens (21116 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-09-14 00:28:22,623 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:22,640 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:22,795 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:22,814 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:22,970 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:22,972 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:23,107 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:23,137 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:23,299 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:23,311 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:23,456 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:23,484 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:23,639 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:23,674 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:23,944 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:24,059 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:24,212 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:24,244 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:24,525 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:24,639 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:24,786 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:24,787 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:24,933 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:28:24,962 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:28:24,962 [WARNING] chat: No records found to build FAISS index.
+2024-09-14 00:28:24,971 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 00:28:24,975 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 00:28:24,996 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 00:29:27,210 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:29:27,239 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:29:27,239 [WARNING] chat: No embedding found for the query.
+2024-09-14 00:29:28,786 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 00:29:28,789 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 00:29:47,845 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 00:29:47,971 [ERROR] chat: Error generating embedding: 'CreateEmbeddingResponse' object has no attribute 'choices'
+2024-09-14 00:29:47,971 [WARNING] chat: No embedding found for the query.
+2024-09-14 00:29:54,034 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 00:29:54,038 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 15:30:14,952 [INFO] db: Database tables created or verified successfully.
+2024-09-14 15:30:14,952 [INFO] db: Connected to the database successfully.
+2024-09-14 15:30:15,344 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-14 15:30:15,345 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 15:30:16,067 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:16,265 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:16,586 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2024-09-14 15:30:16,589 [ERROR] chat: Error generating embedding: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 21116 tokens (21116 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-09-14 15:30:16,746 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:16,920 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,064 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,252 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,433 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,553 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,703 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:17,874 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:18,073 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:18,199 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:18,353 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:18,494 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:30:18,500 [INFO] chat: FAISS index built and saved successfully.
+2024-09-14 15:30:18,508 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 15:30:18,512 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 15:30:18,524 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 15:46:55,304 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:46:55,349 [INFO] db: Retrieved record from world_building with ID: 1
+2024-09-14 15:46:55,349 [INFO] db: Retrieved record from world_building with ID: 5
+2024-09-14 15:46:55,350 [INFO] db: Retrieved record from world_building with ID: 7
+2024-09-14 15:46:55,350 [INFO] db: Retrieved record from world_building with ID: 13
+2024-09-14 15:46:55,350 [INFO] db: Retrieved record from world_building with ID: 8
+2024-09-14 15:46:55,350 [INFO] chat: Found 5 relevant records for the query.
+2024-09-14 15:46:55,705 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2024-09-14 15:46:55,706 [ERROR] chat: Error generating response: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens. However, your messages resulted in 10263 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2024-09-14 15:51:24,569 [INFO] db: Database connection closed.
+2024-09-14 15:54:14,262 [INFO] db: Database tables created or verified successfully.
+2024-09-14 15:54:14,262 [INFO] db: Connected to the database successfully.
+2024-09-14 15:54:15,994 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 15:54:16,003 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 15:54:16,007 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 15:54:16,020 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 15:54:41,789 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:54:41,792 [ERROR] chat: Error searching FAISS index: not enough values to unpack (expected 3, got 2)
+2024-09-14 15:54:43,795 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 15:54:43,799 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 15:56:03,111 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 15:56:36,552 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 15:56:36,565 [ERROR] chat: Error searching FAISS index: not enough values to unpack (expected 3, got 2)
+2024-09-14 15:56:39,577 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 15:56:39,578 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 17:30:44,744 [INFO] db: Database connection closed.
+2024-09-14 17:31:11,732 [INFO] db: Database tables created or verified successfully.
+2024-09-14 17:31:11,733 [INFO] db: Connected to the database successfully.
+2024-09-14 17:31:12,559 [INFO] chat: FAISS index not found. Building a new index...
+2024-09-14 17:31:12,560 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 17:31:12,998 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:13,159 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:13,349 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:13,638 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:13,947 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:14,216 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:14,377 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:14,569 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:14,782 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:14,942 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:15,138 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:15,453 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:15,642 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:15,841 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:16,040 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:16,322 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:16,475 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:16,645 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:31:16,648 [INFO] chat: FAISS index built and saved successfully.
+2024-09-14 17:31:16,656 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:31:16,659 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 17:31:16,672 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 17:31:34,882 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:38:08,121 [INFO] db: Database connection closed.
+2024-09-14 17:38:40,650 [INFO] db: Database tables created or verified successfully.
+2024-09-14 17:38:40,650 [INFO] db: Connected to the database successfully.
+2024-09-14 17:38:41,461 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 17:38:41,470 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:38:41,473 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 17:38:41,487 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 17:39:08,903 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:39:08,948 [INFO] db: Retrieved record from world_building with ID: 12
+2024-09-14 17:39:08,949 [INFO] db: Retrieved record from world_building with ID: 7
+2024-09-14 17:39:08,949 [INFO] db: Retrieved record from world_building with ID: 6
+2024-09-14 17:39:08,949 [INFO] db: Retrieved record from world_building with ID: 11
+2024-09-14 17:39:08,949 [INFO] db: Retrieved record from world_building with ID: 14
+2024-09-14 17:39:08,949 [INFO] chat: Found 5 relevant records for the query.
+2024-09-14 17:39:23,034 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 17:39:23,037 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 17:41:22,367 [INFO] db: Database connection closed.
+2024-09-14 17:47:54,779 [INFO] db: Database tables created or verified successfully.
+2024-09-14 17:47:54,779 [INFO] db: Connected to the database successfully.
+2024-09-14 17:47:55,574 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 17:47:55,583 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:47:55,586 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 17:47:55,600 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 17:48:13,334 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:48:13,362 [INFO] db: Retrieved record from world_building with ID: 12
+2024-09-14 17:48:13,362 [INFO] db: Retrieved record from world_building with ID: 6
+2024-09-14 17:48:13,362 [INFO] db: Retrieved record from world_building with ID: 7
+2024-09-14 17:48:13,362 [INFO] db: Retrieved record from world_building with ID: 11
+2024-09-14 17:48:13,363 [INFO] db: Retrieved record from world_building with ID: 14
+2024-09-14 17:48:13,363 [INFO] chat: Found 5 relevant records for the query.
+2024-09-14 17:48:30,538 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 17:48:30,541 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 17:49:52,613 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:49:58,248 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:49:59,527 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:50:02,762 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 17:54:57,267 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2024-09-14 17:54:57,282 [INFO] db: Retrieved record from world_building with ID: 2
+2024-09-14 17:54:57,283 [INFO] db: Retrieved record from world_building with ID: 4
+2024-09-14 17:54:57,283 [INFO] db: Retrieved record from world_building with ID: 15
+2024-09-14 17:54:57,283 [INFO] db: Retrieved record from world_building with ID: 14
+2024-09-14 17:54:57,283 [INFO] db: Retrieved record from world_building with ID: 13
+2024-09-14 17:54:57,283 [INFO] chat: Found 5 relevant records for the query.
+2024-09-14 17:55:08,448 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-14 17:55:08,452 [INFO] chat: Generated response from ChatGPT.
+2024-09-14 18:49:26,185 [INFO] db: Database connection closed.
+2024-09-14 18:49:47,919 [INFO] db: Database tables created or verified successfully.
+2024-09-14 18:49:47,920 [INFO] db: Connected to the database successfully.
+2024-09-14 18:49:48,737 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 18:49:48,747 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 18:49:48,750 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 18:49:48,764 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 18:50:05,881 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 18:50:07,582 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 18:50:18,892 [INFO] db: Database connection closed.
+2024-09-14 19:10:02,495 [INFO] db: Database tables created or verified successfully.
+2024-09-14 19:10:02,496 [INFO] db: Connected to the database successfully.
+2024-09-14 19:10:03,287 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 19:10:44,656 [INFO] db: Database tables created or verified successfully.
+2024-09-14 19:10:44,657 [INFO] db: Connected to the database successfully.
+2024-09-14 19:10:45,452 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 19:13:09,769 [INFO] db: Database tables created or verified successfully.
+2024-09-14 19:13:09,770 [INFO] db: Connected to the database successfully.
+2024-09-14 19:13:10,580 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 20:04:50,523 [INFO] db: Database tables created or verified successfully.
+2024-09-14 20:04:50,523 [INFO] db: Connected to the database successfully.
+2024-09-14 20:04:51,356 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 20:13:11,441 [INFO] db: Database tables created or verified successfully.
+2024-09-14 20:13:11,442 [INFO] db: Connected to the database successfully.
+2024-09-14 20:13:11,990 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 20:13:12,006 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:13:12,011 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 20:13:12,025 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 20:13:30,807 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:13:34,067 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:14:09,177 [ERROR] db: Error updating world building entry: no such column: last_updated
+2024-09-14 20:14:09,177 [ERROR] ui: Failed to update world building entry: no such column: last_updated
+2024-09-14 20:14:15,422 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:14:17,036 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:14:42,916 [INFO] db: Database connection closed.
+2024-09-14 20:20:56,953 [ERROR] db: Error creating tables: Cannot add a column with non-constant default
+2024-09-14 20:20:56,954 [ERROR] db: Error connecting to database: Cannot add a column with non-constant default
+2024-09-14 20:20:56,954 [ERROR] __main__: Failed to initialize the database: Cannot add a column with non-constant default
+2024-09-14 20:22:13,238 [INFO] db: Added 'last_updated' column to 'world_building' table.
+2024-09-14 20:22:13,240 [INFO] db: Set 'last_updated' for existing 'world_building' records.
+2024-09-14 20:22:13,240 [INFO] db: Added 'last_updated' column to 'session_notes' table.
+2024-09-14 20:22:13,240 [INFO] db: Set 'last_updated' for existing 'session_notes' records.
+2024-09-14 20:22:13,243 [INFO] db: Database tables created or verified successfully.
+2024-09-14 20:22:13,243 [INFO] db: Connected to the database successfully.
+2024-09-14 20:22:13,784 [INFO] chat: FAISS index loaded successfully.
+2024-09-14 20:22:13,796 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:22:13,802 [INFO] db: Retrieved 0 session notes entries.
+2024-09-14 20:22:13,818 [INFO] db: Retrieved 0 NPC entries.
+2024-09-14 20:22:31,394 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:22:32,221 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:22:32,221 [ERROR] ui: Failed to initiate edit: too many values to unpack (expected 3)
+2024-09-14 20:22:38,615 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:22:40,066 [INFO] db: Retrieved 15 world building entries.
+2024-09-14 20:22:40,066 [ERROR] ui: Failed to initiate edit: too many values to unpack (expected 3)
+2024-09-14 20:22:46,002 [INFO] db: Database connection closed.

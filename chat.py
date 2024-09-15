@@ -1,10 +1,11 @@
 # chat.py
 import os
 import logging
-import openai
+from openai import OpenAI
 import faiss
 import numpy as np
 from db import Database
+import tiktoken
 
 logger = logging.getLogger(__name__)
 
@@ -13,16 +14,23 @@ class ChatManager:
     Manages interactions with OpenAI's ChatGPT and FAISS for semantic search and response generation.
     Handles the indexing of world building, session notes, and NPC data.
     """
-    def __init__(self, db, faiss_index_path='faiss.index', record_ids_path='record_ids.npy'):
+    def __init__(self, db, api_key, faiss_index_path='faiss.index', record_ids_path='record_ids.npy'):
         """
-        Initializes the ChatManager with database connection and FAISS index.
+        Initializes the ChatManager with database connection, OpenAI client, and FAISS index.
         """
         self.db = db
         self.faiss_index_path = faiss_index_path
         self.record_ids_path = record_ids_path
-        self.dimension = 1536  # Dimension size for OpenAI's 'text-embedding-ada-002'
+        self.dimension = 1536  # Dimension size for OpenAI's 'text-embedding-3-small'
         self.index = faiss.IndexFlatL2(self.dimension)
         self.record_ids = []
+        self.client = OpenAI(api_key=api_key)  # Instantiate OpenAI client
+        self.tokenizer = tiktoken.get_encoding("cl100k_base")
+
+        if not self.client.api_key:
+            logger.error("OpenAI API key not found. Please set OPENAI_API_KEY in the environment variables.")
+            raise ValueError("OpenAI API key not found.")
+
         self.load_faiss_index()
 
     def load_faiss_index(self):
@@ -42,6 +50,17 @@ class ChatManager:
             logger.info("FAISS index not found. Building a new index...")
             self.build_faiss_index()
 
+    def chunk_text(self, text, max_tokens=7500):
+        """
+        Splits text into chunks of approximately max_tokens.
+        """
+        tokens = self.tokenizer.encode(text)
+        chunks = []
+        for i in range(0, len(tokens), max_tokens):
+            chunk = self.tokenizer.decode(tokens[i:i + max_tokens])
+            chunks.append(chunk)
+        return chunks
+
     def build_faiss_index(self):
         """
         Builds the FAISS index from existing world building, session notes, and NPC records.
@@ -55,27 +74,32 @@ class ChatManager:
             # Index World Building Records
             for record in records['world_building']:
                 text = f"World Building - {record[1]}: {record[2]}"
-                embedding = self.get_embedding(text)
-                if embedding:
-                    embeddings.append(embedding)
-                    self.record_ids.append(('world_building', record[0]))
+                chunks = self.chunk_text(text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('world_building', record[0], i))
 
             # Index Session Notes Records
             for record in records['session_notes']:
                 text = f"Session Notes - {record[1]}: {record[2]}"
-                embedding = self.get_embedding(text)
-                if embedding:
-                    embeddings.append(embedding)
-                    self.record_ids.append(('session_notes', record[0]))
+                chunks = self.chunk_text(text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('session_notes', record[0], i))
 
             # Index NPC Records
             for npc in npcs:
-                # Concatenate relevant NPC fields for embedding
                 npc_text = self.construct_npc_text(npc)
-                embedding = self.get_embedding(npc_text)
-                if embedding:
-                    embeddings.append(embedding)
-                    self.record_ids.append(('npc', npc[0]))  # Assuming npc_id is the first field
+                chunks = self.chunk_text(npc_text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('npc', npc[0], i))
 
             if embeddings:
                 embeddings_np = np.array(embeddings).astype('float32')
@@ -134,11 +158,11 @@ class ChatManager:
         Retrieves the embedding for a given text using OpenAI's Embedding API.
         """
         try:
-            response = openai.Embedding.create(
+            response = self.client.embeddings.create(
                 input=text,
-                model="text-embedding-ada-002"
+                model="text-embedding-3-small"
             )
-            embedding = response['data'][0]['embedding']
+            embedding = response.data[0].embedding
             return embedding
         except Exception as e:
             logger.error(f"Error generating embedding: {e}")
@@ -159,22 +183,25 @@ class ChatManager:
                 logger.warning(f"Unknown record type: {record_type}")
                 return
 
-            embedding = self.get_embedding(text)
-            if embedding:
-                embedding_np = np.array([embedding]).astype('float32')
-                self.index.add(embedding_np)
-                self.record_ids.append((record_type, record[0]))
-                # Save updated index and record_ids
-                faiss.write_index(self.index, self.faiss_index_path)
-                np.save(self.record_ids_path, np.array(self.record_ids, dtype=object))
-                logger.info(f"Added new {record_type} record to FAISS index.")
+            chunks = self.chunk_text(text)
+            for i, chunk in enumerate(chunks):
+                embedding = self.get_embedding(chunk)
+                if embedding:
+                    embedding_np = np.array([embedding]).astype('float32')
+                    self.index.add(embedding_np)
+                    self.record_ids.append((record_type, record[0], i))
+            
+            # Save updated index and record_ids
+            faiss.write_index(self.index, self.faiss_index_path)
+            np.save(self.record_ids_path, np.array(self.record_ids, dtype=object))
+            logger.info(f"Added new {record_type} record to FAISS index.")
         except Exception as e:
             logger.error(f"Error adding record to FAISS index: {e}")
 
     def search_faiss(self, query, top_k=5):
         """
         Searches the FAISS index for the most relevant records based on the query.
-        Returns a list of tuples containing record type and record data.
+        Returns a list of tuples containing record type, record data, and chunk index.
         """
         try:
             embedding = self.get_embedding(query)
@@ -188,16 +215,21 @@ class ChatManager:
             relevant_records = []
             for idx in indices[0]:
                 if idx < len(self.record_ids):
-                    record_type, record_id = self.record_ids[idx]
-                    record = self.db.get_record_by_id(record_type, record_id)
-                    if record:
-                        relevant_records.append((record_type, record))
+                    record = self.record_ids[idx]
+                    if len(record) == 2:
+                        record_type, record_id = record
+                        chunk_id = 0
+                    else:
+                        record_type, record_id, chunk_id = record
+                    db_record = self.db.get_record_by_id(record_type, record_id)
+                    if db_record:
+                        relevant_records.append((record_type, db_record, chunk_id))
             logger.info(f"Found {len(relevant_records)} relevant records for the query.")
             return relevant_records
         except Exception as e:
             logger.error(f"Error searching FAISS index: {e}")
             return []
-
+    
     def generate_response(self, prompt):
         """
         Generates a response from ChatGPT based on the user's prompt and relevant context retrieved via FAISS.
@@ -205,15 +237,17 @@ class ChatManager:
         try:
             relevant_records = self.search_faiss(prompt)
             context = ""
-            for record_type, record in relevant_records:
+            for record_type, record, chunk_id in relevant_records:
                 if record_type == 'world_building':
-                    context += f"World Building - Title: {record[1]}\nContent: {record[2]}\n\n"
+                    text = f"World Building - Title: {record[1]}\nContent: {record[2]}"
                 elif record_type == 'session_notes':
-                    context += f"Session Notes - Date: {record[1]}\nNotes: {record[2]}\n\n"
+                    text = f"Session Notes - Date: {record[1]}\nNotes: {record[2]}"
                 elif record_type == 'npc':
-                    context += f"NPC - {record[1]}:\n"
-                    npc_text = self.construct_npc_text(record)
-                    context += f"{npc_text}\n\n"
+                    text = f"NPC - {record[1]}:\n{self.construct_npc_text(record)}"
+                
+                chunks = self.chunk_text(text)
+                if chunk_id < len(chunks):
+                    context += f"{chunks[chunk_id]}\n\n"
 
             if not context:
                 context = "No relevant information found in the database."
@@ -224,7 +258,7 @@ class ChatManager:
                 {"role": "user", "content": prompt}
             ]
 
-            response = openai.ChatCompletion.create(
+            response = self.client.chat.completions.create(
                 model="gpt-4",
                 messages=messages,
                 max_tokens=500,
@@ -233,7 +267,7 @@ class ChatManager:
                 temperature=0.7,
             )
             logger.info("Generated response from ChatGPT.")
-            return response.choices[0].message['content'].strip()
+            return response.choices[0].message.content.strip()
         except Exception as e:
             logger.error(f"Error generating response: {e}")
             return "I'm sorry, but I encountered an error while trying to generate a response. Please try again later."

@@ -1,6 +1,7 @@
 # db.py
 import sqlite3
 import logging
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,7 @@ class Database:
         """
         Creates necessary tables if they do not exist.
         Includes tables for world building, session notes, and NPC management.
+        Ensures that 'last_updated' column exists in 'world_building' and 'session_notes' tables.
         """
         try:
             cursor = self.conn.cursor()
@@ -36,6 +38,16 @@ class Database:
                     content TEXT NOT NULL
                 )
             ''')
+            # Check if 'last_updated' column exists; if not, add it
+            cursor.execute("PRAGMA table_info(world_building)")
+            columns = [info[1] for info in cursor.fetchall()]
+            if 'last_updated' not in columns:
+                cursor.execute("ALTER TABLE world_building ADD COLUMN last_updated TIMESTAMP")
+                logger.info("Added 'last_updated' column to 'world_building' table.")
+                # Set 'last_updated' for existing records
+                cursor.execute("UPDATE world_building SET last_updated = CURRENT_TIMESTAMP WHERE last_updated IS NULL")
+                logger.info("Set 'last_updated' for existing 'world_building' records.")
+            
             # Table for session notes
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS session_notes (
@@ -44,7 +56,17 @@ class Database:
                     notes TEXT NOT NULL
                 )
             ''')
-            # Table for NPCs
+            # Check if 'last_updated' column exists; if not, add it
+            cursor.execute("PRAGMA table_info(session_notes)")
+            columns = [info[1] for info in cursor.fetchall()]
+            if 'last_updated' not in columns:
+                cursor.execute("ALTER TABLE session_notes ADD COLUMN last_updated TIMESTAMP")
+                logger.info("Added 'last_updated' column to 'session_notes' table.")
+                # Set 'last_updated' for existing records
+                cursor.execute("UPDATE session_notes SET last_updated = CURRENT_TIMESTAMP WHERE last_updated IS NULL")
+                logger.info("Set 'last_updated' for existing 'session_notes' records.")
+
+            # Table for NPCs (already includes 'last_updated')
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS npc (
                     npc_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -78,7 +100,6 @@ class Database:
                     last_updated TEXT DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
-            # Additional tables for relationships (e.g., languages, factions) can be added here
             self.conn.commit()
             logger.info("Database tables created or verified successfully.")
         except sqlite3.Error as e:
@@ -92,7 +113,11 @@ class Database:
         """
         try:
             cursor = self.conn.cursor()
-            cursor.execute('INSERT INTO world_building (title, content) VALUES (?, ?)', (title, content))
+            # Include 'last_updated' in the INSERT statement
+            cursor.execute(
+                'INSERT INTO world_building (title, content, last_updated) VALUES (?, ?, CURRENT_TIMESTAMP)',
+                (title, content)
+            )
             self.conn.commit()
             logger.info(f"Added world building entry: {title}")
             return cursor.lastrowid
@@ -115,6 +140,36 @@ class Database:
             logger.error(f"Error retrieving world building entries: {e}")
             raise
 
+    def update_world_building(self, record_id, title, content):
+        """
+        Updates an existing world building entry.
+        
+        Parameters:
+            record_id (int): The ID of the record to update.
+            title (str): The new title.
+            content (str): The new content.
+        
+        Returns:
+            bool: True if update was successful, False otherwise.
+        """
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                'UPDATE world_building SET title = ?, content = ?, last_updated = CURRENT_TIMESTAMP WHERE id = ?',
+                (title, content, record_id)
+            )
+            self.conn.commit()
+            if cursor.rowcount:
+                logger.info(f"Updated world building entry with ID: {record_id}")
+                return True
+            else:
+                logger.warning(f"No world building entry found with ID: {record_id}")
+                return False
+        except sqlite3.Error as e:
+            logger.error(f"Error updating world building entry: {e}")
+            self.conn.rollback()
+            raise
+
     # Session Notes Methods
     def add_session_notes(self, date, notes):
         """
@@ -122,7 +177,11 @@ class Database:
         """
         try:
             cursor = self.conn.cursor()
-            cursor.execute('INSERT INTO session_notes (date, notes) VALUES (?, ?)', (date, notes))
+            # Include 'last_updated' in the INSERT statement
+            cursor.execute(
+                'INSERT INTO session_notes (date, notes, last_updated) VALUES (?, ?, CURRENT_TIMESTAMP)',
+                (date, notes)
+            )
             self.conn.commit()
             logger.info(f"Added session notes for date: {date}")
             return cursor.lastrowid
@@ -143,6 +202,36 @@ class Database:
             return records
         except sqlite3.Error as e:
             logger.error(f"Error retrieving session notes: {e}")
+            raise
+
+    def update_session_notes(self, record_id, date, notes):
+        """
+        Updates an existing session notes entry.
+        
+        Parameters:
+            record_id (int): The ID of the record to update.
+            date (str): The new date.
+            notes (str): The new notes.
+        
+        Returns:
+            bool: True if update was successful, False otherwise.
+        """
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                'UPDATE session_notes SET date = ?, notes = ?, last_updated = CURRENT_TIMESTAMP WHERE id = ?',
+                (date, notes, record_id)
+            )
+            self.conn.commit()
+            if cursor.rowcount:
+                logger.info(f"Updated session notes entry with ID: {record_id}")
+                return True
+            else:
+                logger.warning(f"No session notes entry found with ID: {record_id}")
+                return False
+        except sqlite3.Error as e:
+            logger.error(f"Error updating session notes entry: {e}")
+            self.conn.rollback()
             raise
 
     # NPC Management Methods
@@ -245,18 +334,55 @@ class Database:
         """
         try:
             cursor = self.conn.cursor()
-            # Fetch all world-building records
-            cursor.execute('SELECT id, title, content FROM world_building')
+            # Fetch all world-building records with 'last_updated'
+            cursor.execute('SELECT id, title, content, last_updated FROM world_building')
             world_records = cursor.fetchall()
-            # Fetch all session notes
-            cursor.execute('SELECT id, date, notes FROM session_notes')
+            # Fetch all session notes with 'last_updated'
+            cursor.execute('SELECT id, date, notes, last_updated FROM session_notes')
             session_records = cursor.fetchall()
+            # Fetch all NPC records
+            cursor.execute('SELECT * FROM npc')
+            npc_records = cursor.fetchall()
             return {
                 'world_building': world_records,
-                'session_notes': session_records
+                'session_notes': session_records,
+                'npc': npc_records
             }
         except sqlite3.Error as e:
             logger.error(f"Error retrieving all records: {e}")
+            raise
+
+    def get_record_by_id(self, table, record_id):
+        """
+        Retrieves a single record by its ID from the specified table.
+        
+        Parameters:
+            table (str): The name of the table ('world_building', 'session_notes', 'npc').
+            record_id (int): The ID of the record to retrieve.
+        
+        Returns:
+            tuple: The fetched record, or None if not found.
+        """
+        try:
+            cursor = self.conn.cursor()
+            if table == 'world_building':
+                cursor.execute('SELECT * FROM world_building WHERE id = ?', (record_id,))
+            elif table == 'session_notes':
+                cursor.execute('SELECT * FROM session_notes WHERE id = ?', (record_id,))
+            elif table == 'npc':
+                cursor.execute('SELECT * FROM npc WHERE npc_id = ?', (record_id,))
+            else:
+                logger.error(f"Unknown table: {table}")
+                return None
+            record = cursor.fetchone()
+            if record:
+                logger.info(f"Retrieved record from {table} with ID: {record_id}")
+                return record
+            else:
+                logger.warning(f"No record found in {table} with ID: {record_id}")
+                return None
+        except sqlite3.Error as e:
+            logger.error(f"Error retrieving record by ID: {e}")
             raise
 
     def close(self):
