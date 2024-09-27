@@ -1,0 +1,63 @@
+{
+    "Rooms": [
+        {
+            "ID": 1,
+            "Type": "Chamber",
+            "Shape": "Rectangular",
+            "Size (sq ft)": 600,
+            "Coordinates": [
+                -12.24744871391589,
+                -12.24744871391589,
+                12.24744871391589,
+                12.24744871391589
+            ],
+            "Exits": [
+                {
+                    "Direction": "Chamber",
+                    "LeadsTo": 2
+                }
+            ],
+            "Contents": "Monster and treasure",
+            "Level": 1
+        },
+        {
+            "ID": 2,
+            "Type": "Chamber",
+            "Shape": "Square",
+            "Size (sq ft)": 1600,
+            "Coordinates": [
+                -32.24744871391589,
+                -32.24744871391589,
+                7.75255128608411,
+                7.75255128608411
+            ],
+            "Exits": [
+                {
+                    "Direction": "Ahead",
+                    "LeadsTo": 3
+                }
+            ],
+            "Contents": "Empty",
+            "Level": 1
+        }
+    ],
+    "Corridors": [
+        {
+            "ID": 3,
+            "Type": "Passage",
+            "Length (ft)": 30,
+            "Width (ft)": 10,
+            "Direction": "Ahead",
+            "Start Coordinates": [
+                7.75255128608411,
+                7.75255128608411
+            ],
+            "End Coordinates": [
+                37.75255128608411,
+                37.75255128608411
+            ],
+            "Level": 1
+        }
+    ],
+    "Stairs": []
+}

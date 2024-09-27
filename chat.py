@@ -179,6 +179,8 @@ class ChatManager:
                 text = f"Session Notes - {record[1]}: {record[2]}"
             elif record_type == 'npc':
                 text = self.construct_npc_text(record)
+            elif record_type == 'maps':
+                text = f"Map - {record[1]}: Campaign: {record[3]}, World: {record[4]}, Location: {record[5]}, Adventure: {record[6]}, Theme: {record[7]}, Description: {record[8]}"
             else:
                 logger.warning(f"Unknown record type: {record_type}")
                 return
@@ -229,7 +231,72 @@ class ChatManager:
         except Exception as e:
             logger.error(f"Error searching FAISS index: {e}")
             return []
-    
+
+    def rebuild_faiss_index(self):
+        """
+        Rebuilds the FAISS index from scratch using all current records.
+        """
+        try:
+            # Clear existing index
+            self.index = faiss.IndexFlatL2(self.dimension)
+            self.record_ids = []
+
+            # Rebuild index with current data
+            records = self.db.get_all_records()
+            embeddings = []
+
+            # Process World Building Records
+            for record in records['world_building']:
+                text = f"World Building - {record['title']}: {record['content']}"
+                chunks = self.chunk_text(text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('world_building', record['id'], i))
+
+            # Process Session Notes Records
+            for record in records['session_notes']:
+                text = f"Session Notes - {record['date']}: {record['notes']}"
+                chunks = self.chunk_text(text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('session_notes', record['id'], i))
+
+            # Process NPC Records
+            for npc in records['npc']:
+                npc_text = self.construct_npc_text(npc)
+                chunks = self.chunk_text(npc_text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('npc', npc['npc_id'], i))
+
+            # Process Map Records
+            for map_record in records['maps']:
+                map_text = f"Map - {map_record['name']}: {map_record['description']}"
+                chunks = self.chunk_text(map_text)
+                for i, chunk in enumerate(chunks):
+                    embedding = self.get_embedding(chunk)
+                    if embedding:
+                        embeddings.append(embedding)
+                        self.record_ids.append(('maps', map_record['id'], i))
+
+            if embeddings:
+                embeddings_np = np.array(embeddings).astype('float32')
+                self.index.add(embeddings_np)
+                faiss.write_index(self.index, self.faiss_index_path)
+                np.save(self.record_ids_path, np.array(self.record_ids, dtype=object))
+                logger.info("FAISS index rebuilt and saved successfully.")
+            else:
+                logger.warning("No records found to rebuild FAISS index.")
+        except Exception as e:
+            logger.error(f"Error rebuilding FAISS index: {e}")
+            raise
+
     def generate_response(self, prompt):
         """
         Generates a response from ChatGPT based on the user's prompt and relevant context retrieved via FAISS.

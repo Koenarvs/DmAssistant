@@ -1,16 +1,19 @@
 # ui.py
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+from tkinter import ttk, messagebox, filedialog, colorchooser
 from tkhtmlview import HTMLLabel  # Using tkhtmlview for HTML rendering
+from PIL import Image, ImageTk, ImageDraw
 from chat import ChatManager
 from db import Database
 from datetime import datetime
 from npc_generator import generate_npc
+from dungeon_generator import DungeonGenerator
 import os
 import markdown
 import logging
-import json  # Added for JSON loading
-from pathlib import Path  # Import pathlib for path handling
+import json
+from pathlib import Path
+import io
 
 # Configure logger for ui.py
 logger = logging.getLogger(__name__)
@@ -23,7 +26,7 @@ logger.addHandler(handler)
 class DnDManagerApp:
     """
     The main user interface for the D&D Manager application.
-    It includes tabs for ChatGPT interactions, World Building, Session Notes, and NPC Management.
+    It includes tabs for ChatGPT interactions, World Building, Session Notes, NPC Management, and Maps.
     """
     def __init__(self, root, db, api_key):
         """
@@ -54,6 +57,7 @@ class DnDManagerApp:
         self.world_building_contents = {}
         self.session_notes_contents = {}
         self.npc_details_contents = {}
+        self.map_display_image = None  # To hold the currently displayed map image
 
     def load_json_data(self):
         """
@@ -100,12 +104,17 @@ class DnDManagerApp:
             self.npc_tab = ttk.Frame(tab_control)
             tab_control.add(self.npc_tab, text='NPC Management')
 
+            # Maps Tab
+            self.maps_tab = ttk.Frame(tab_control)
+            tab_control.add(self.maps_tab, text='Maps')
+
             tab_control.pack(expand=1, fill='both')
 
             self.create_chat_tab()
             self.create_world_tab()
             self.create_session_tab()
             self.create_npc_tab()
+            self.create_maps_tab()  # Initialize Maps Tab
         except Exception as e:
             logger.error(f"Error during widget creation: {e}")
             raise
@@ -122,12 +131,12 @@ class DnDManagerApp:
 
             # Entry Field
             self.chat_entry = tk.Entry(self.chat_tab)
-            self.chat_entry.pack(padx=10, pady=(0,10), fill='x')
+            self.chat_entry.pack(padx=10, pady=(0, 10), fill='x')
             self.chat_entry.bind("<Return>", self.send_chat)
 
             # Send Button
             send_button = tk.Button(self.chat_tab, text="Send", command=self.send_chat)
-            send_button.pack(padx=10, pady=(0,10))
+            send_button.pack(padx=10, pady=(0, 10))
         except Exception as e:
             logger.error(f"Error creating Chat Tab: {e}")
             raise
@@ -160,10 +169,7 @@ class DnDManagerApp:
             # Convert chat messages to Markdown format
             md_content = "## Chat History\n<hr>\n"
             for sender, message in self.chat_messages:
-                if sender == "You":
-                    md_content += f"**{sender}:** {message}\n\n"
-                else:
-                    md_content += f"**{sender}:** {message}\n\n"
+                md_content += f"**{sender}:** {message}\n\n"
 
             # Convert Markdown to HTML
             html_content = markdown.markdown(md_content, extensions=['fenced_code', 'tables'])
@@ -218,7 +224,7 @@ class DnDManagerApp:
 
             # Listbox for Entries
             self.world_listbox = tk.Listbox(display_frame)
-            self.world_listbox.pack(side='left', fill='y', padx=(0,10), pady=5)
+            self.world_listbox.pack(side='left', fill='y', padx=(0, 10), pady=5)
             self.world_listbox.bind('<<ListboxSelect>>', self.display_selected_world)
 
             # Scrollbar for Listbox
@@ -344,9 +350,6 @@ class DnDManagerApp:
 
             save_button = tk.Button(edit_dialog, text="Save Changes", command=save_changes)
             save_button.grid(row=2, column=1, sticky='e', pady=10, padx=5)
-        except ValueError as ve:
-            logger.error(f"Failed to initiate edit: {ve}")
-            messagebox.showerror("Error", f"Failed to initiate edit: {str(ve)}")
         except Exception as e:
             logger.error(f"Failed to initiate edit: {e}")
             messagebox.showerror("Error", f"Failed to initiate edit: {str(e)}")
@@ -396,7 +399,7 @@ class DnDManagerApp:
 
             # Listbox for Entries
             self.session_listbox = tk.Listbox(display_frame)
-            self.session_listbox.pack(side='left', fill='y', padx=(0,10), pady=5)
+            self.session_listbox.pack(side='left', fill='y', padx=(0, 10), pady=5)
             self.session_listbox.bind('<<ListboxSelect>>', self.display_selected_session)
 
             # Scrollbar for Listbox
@@ -521,9 +524,6 @@ class DnDManagerApp:
 
             save_button = tk.Button(edit_dialog, text="Save Changes", command=save_changes)
             save_button.grid(row=2, column=1, sticky='e', pady=10, padx=5)
-        except ValueError as ve:
-            logger.error(f"Failed to initiate edit: {ve}")
-            messagebox.showerror("Error", f"Failed to initiate edit: {str(ve)}")
         except Exception as e:
             logger.error(f"Failed to initiate edit: {e}")
             messagebox.showerror("Error", f"Failed to initiate edit: {str(e)}")
@@ -654,7 +654,7 @@ class DnDManagerApp:
 
             # Listbox for NPCs
             self.npc_listbox = tk.Listbox(list_frame)
-            self.npc_listbox.pack(side='left', fill='y', padx=(0,10), pady=5)
+            self.npc_listbox.pack(side='left', fill='y', padx=(0, 10), pady=5)
             self.npc_listbox.bind('<<ListboxSelect>>', self.display_selected_npc)
 
             # Scrollbar for Listbox
@@ -897,16 +897,488 @@ class DnDManagerApp:
                     npc_info += f"**{field}:** ![]({image_url})\n\n"
                 else:
                     npc_info += f"**{field}:** {value}\n\n"
-            elif field == "Faction Affiliation":
-                # Display faction affiliation
-                npc_info += f"**{field}:** {value}\n\n"
             else:
                 npc_info += f"**{field}:** {value}\n\n"
         return npc_info
 
-    # --- Additional NPC Management Features ---
-    # Future enhancements can include editing and deleting NPCs through the UI
+    # --- Maps Tab ---
+    def create_maps_tab(self):
+        """
+        Sets up the Maps management interface.
+        """
+        try:
+            # Frame for Map Upload and Metadata
+            upload_frame = ttk.LabelFrame(self.maps_tab, text="Upload New Map")
+            upload_frame.pack(padx=10, pady=10, fill='x')
 
+            # Map Name
+            ttk.Label(upload_frame, text="Name:").grid(row=0, column=0, sticky='w', pady=2)
+            self.map_name_entry = ttk.Entry(upload_frame)
+            self.map_name_entry.grid(row=0, column=1, sticky='ew', pady=2)
+
+            # Upload Button
+            upload_button = ttk.Button(upload_frame, text="Upload Map Image", command=self.upload_map)
+            upload_button.grid(row=0, column=2, sticky='w', pady=2, padx=5)
+
+            # Additional Metadata Fields
+            metadata_fields = ["Campaign", "World", "Location", "Adventure", "Theme", "Description"]
+            self.map_metadata_entries = {}
+            for idx, field in enumerate(metadata_fields, start=1):
+                ttk.Label(upload_frame, text=f"{field}:").grid(row=idx, column=0, sticky='w', pady=2)
+                entry = ttk.Entry(upload_frame)
+                entry.grid(row=idx, column=1, sticky='ew', pady=2)
+                self.map_metadata_entries[field.lower()] = entry
+
+            # Configure grid weights
+            upload_frame.columnconfigure(1, weight=1)
+
+            # Save Map Button
+            save_map_button = ttk.Button(upload_frame, text="Save Map", command=self.save_map)
+            save_map_button.grid(row=len(metadata_fields)+1, column=1, sticky='e', pady=10)
+
+            # Separator
+            separator = ttk.Separator(self.maps_tab, orient='horizontal')
+            separator.pack(fill='x', padx=10, pady=5)
+
+            # Frame for Map List and Display
+            display_frame = ttk.Frame(self.maps_tab)
+            display_frame.pack(padx=10, pady=10, fill='both', expand=True)
+
+            # Listbox for Existing Maps
+            listbox_frame = ttk.Frame(display_frame)
+            listbox_frame.pack(side='left', fill='y', padx=(0, 10))
+
+            ttk.Label(listbox_frame, text="Existing Maps:").pack(anchor='w')
+
+            self.maps_listbox = tk.Listbox(listbox_frame)
+            self.maps_listbox.pack(side='left', fill='y')
+            self.maps_listbox.bind('<<ListboxSelect>>', self.display_selected_map)
+
+            # Scrollbar for Listbox
+            scrollbar = ttk.Scrollbar(listbox_frame, orient='vertical', command=self.maps_listbox.yview)
+            scrollbar.pack(side='left', fill='y')
+            self.maps_listbox.config(yscrollcommand=scrollbar.set)
+
+            # Frame for Map Display and Controls
+            map_display_frame = ttk.Frame(display_frame)
+            map_display_frame.pack(side='left', fill='both', expand=True)
+
+            # Canvas for Map Display with Scrollbars
+            canvas_frame = ttk.Frame(map_display_frame)
+            canvas_frame.pack(fill='both', expand=True)
+
+            self.map_canvas = tk.Canvas(canvas_frame, bg='grey')
+            self.map_canvas.pack(side='left', fill='both', expand=True)
+
+            # Scrollbars
+            self.h_scroll = ttk.Scrollbar(canvas_frame, orient='horizontal', command=self.map_canvas.xview)
+            self.h_scroll.pack(side='bottom', fill='x')
+            self.v_scroll = ttk.Scrollbar(canvas_frame, orient='vertical', command=self.map_canvas.yview)
+            self.v_scroll.pack(side='right', fill='y')
+
+            self.map_canvas.configure(xscrollcommand=self.h_scroll.set, yscrollcommand=self.v_scroll.set)
+
+            # Bind resize event
+            self.map_canvas.bind("<Configure>", self.resize_map_canvas)
+
+            # Controls Frame
+            controls_frame = ttk.Frame(map_display_frame)
+            controls_frame.pack(fill='x', pady=5)
+
+            # Grid Toggle
+            self.grid_var = tk.BooleanVar()
+            grid_checkbox = ttk.Checkbutton(controls_frame, text="Show 1/4\" Grid", variable=self.grid_var, command=self.toggle_grid)
+            grid_checkbox.pack(side='left', padx=5)
+
+            # Generate Dungeon Button
+            generate_dungeon_button = ttk.Button(controls_frame, text="Generate Dungeon", command=self.generate_dungeon)
+            generate_dungeon_button.pack(side='left', padx=5)
+
+            # Drawing Tools Button
+            drawing_tools_button = ttk.Button(controls_frame, text="Open Drawing Tools", command=self.open_drawing_tools)
+            drawing_tools_button.pack(side='left', padx=5)
+
+            # Load existing maps into the listbox
+            self.populate_maps_listbox()
+        except Exception as e:
+            logger.error(f"Error creating Maps Tab: {e}")
+            raise
+
+    def upload_map(self):
+        """
+        Opens a file dialog to select an image to upload as a map.
+        """
+        try:
+            file_path = filedialog.askopenfilename(
+                title="Select Map Image",
+                filetypes=[("Image Files", "*.png *.jpg *.jpeg"), ("All Files", "*.*")]
+            )
+            if file_path:
+                # Display the selected image path in the map name entry
+                name = os.path.splitext(os.path.basename(file_path))[0]
+                self.map_name_entry.delete(0, tk.END)
+                self.map_name_entry.insert(0, name)
+                # Store the image path temporarily for saving
+                self.selected_map_image_path = file_path
+                messagebox.showinfo("Image Selected", f"Selected image: {file_path}")
+        except Exception as e:
+            logger.error(f"Error uploading map: {e}")
+            messagebox.showerror("Error", f"Failed to upload map: {e}")
+
+    def save_map(self):
+        """
+        Saves the uploaded map and its metadata to the database.
+        """
+        try:
+            name = self.map_name_entry.get().strip()
+            if not name:
+                messagebox.showwarning("Input Error", "Please provide a name for the map.")
+                return
+
+            # Get metadata
+            campaign = self.map_metadata_entries['campaign'].get().strip()
+            world = self.map_metadata_entries['world'].get().strip()
+            location = self.map_metadata_entries['location'].get().strip()
+            adventure = self.map_metadata_entries['adventure'].get().strip()
+            theme = self.map_metadata_entries['theme'].get().strip()
+            description = self.map_metadata_entries['description'].get().strip()
+
+            # Get image data
+            if hasattr(self, 'selected_map_image_path') and self.selected_map_image_path:
+                with open(self.selected_map_image_path, 'rb') as file:
+                    image_data = file.read()
+            else:
+                messagebox.showwarning("Input Error", "Please upload a map image before saving.")
+                return
+
+            # Save to database
+            map_id = self.db.add_map(name, image_data, campaign, world, location, adventure, theme, description)
+            messagebox.showinfo("Success", f"Map '{name}' saved successfully.")
+            self.populate_maps_listbox()
+            self.clear_map_form()
+            # Add to FAISS index
+            new_map = self.db.get_map_by_id(map_id)
+            self.chat_manager.add_record_to_index('maps', new_map)
+        except Exception as e:
+            logger.error(f"Failed to save map: {e}")
+            messagebox.showerror("Error", f"Failed to save map: {e}")
+
+    def populate_maps_listbox(self):
+        """
+        Populates the Listbox with existing maps.
+        """
+        try:
+            records = self.db.get_maps()
+            self.maps_listbox.delete(0, tk.END)
+            for record in records:
+                display_text = f"{record[1]} ({record[3]})"  # Name (World)
+                self.maps_listbox.insert(tk.END, display_text)
+        except Exception as e:
+            logger.error(f"Failed to populate maps list: {e}")
+            messagebox.showerror("Error", f"Failed to populate maps list: {e}")
+
+    def display_selected_map(self, event):
+        """
+        Displays the selected map image on the canvas with optional grid.
+        """
+        try:
+            selection = self.maps_listbox.curselection()
+            if selection:
+                index = selection[0]
+                records = self.db.get_maps()
+                selected_record = records[index]
+                map_id = selected_record[0]
+                map_data = self.db.get_map_by_id(map_id)
+                image_blob = map_data[2]
+
+                # Load image from blob
+                image = Image.open(io.BytesIO(image_blob))
+                self.display_image_on_canvas(image)
+
+                # Store current map ID for future reference (e.g., editing)
+                self.current_map_id = map_id
+        except Exception as e:
+            logger.error(f"Failed to display selected map: {e}")
+            messagebox.showerror("Error", f"Failed to display selected map: {e}")
+
+    def display_image_on_canvas(self, image):
+        """
+        Displays a PIL image on the Tkinter Canvas with scrollbars.
+        """
+        try:
+            self.map_canvas.delete("all")  # Clear previous image
+
+            # Resize image if it's too large
+            max_size = (2000, 2000)
+            image.thumbnail(max_size, Image.ANTIALIAS)
+
+            self.map_display_image = ImageTk.PhotoImage(image)
+            self.map_canvas.create_image(0, 0, anchor='nw', image=self.map_display_image)
+            self.map_canvas.config(scrollregion=self.map_canvas.bbox(tk.ALL))
+
+            if self.grid_var.get():
+                self.draw_grid(image.width, image.height)
+        except Exception as e:
+            logger.error(f"Error displaying image on canvas: {e}")
+            messagebox.showerror("Error", f"Failed to display map image: {e}")
+
+    def clear_map_form(self):
+        """
+        Clears the map upload form fields.
+        """
+        try:
+            self.map_name_entry.delete(0, tk.END)
+            for entry in self.map_metadata_entries.values():
+                entry.delete(0, tk.END)
+            if hasattr(self, 'selected_map_image_path'):
+                del self.selected_map_image_path
+        except Exception as e:
+            logger.error(f"Error clearing map form: {e}")
+
+    def toggle_grid(self):
+        """
+        Toggles the grid overlay on the map canvas.
+        """
+        try:
+            selection = self.maps_listbox.curselection()
+            if selection:
+                index = selection[0]
+                records = self.db.get_maps()
+                selected_record = records[index]
+                map_id = selected_record[0]
+                map_data = self.db.get_map_by_id(map_id)
+                image_blob = map_data[2]
+
+                image = Image.open(io.BytesIO(image_blob))
+                self.display_image_on_canvas(image)
+        except Exception as e:
+            logger.error(f"Error toggling grid: {e}")
+            messagebox.showerror("Error", f"Failed to toggle grid: {e}")
+
+    def draw_grid(self, width, height):
+        """
+        Draws a 1/4" grid on the canvas based on image dimensions.
+        Assumes 96 DPI for screen display (1 inch = 96 pixels).
+        """
+        try:
+            grid_size = 24  # 1/4" at 96 DPI
+            for x in range(0, width, grid_size):
+                self.map_canvas.create_line(x, 0, x, height, fill='black', width=1)
+            for y in range(0, height, grid_size):
+                self.map_canvas.create_line(0, y, width, y, fill='black', width=1)
+        except Exception as e:
+            logger.error(f"Error drawing grid: {e}")
+            messagebox.showerror("Error", f"Failed to draw grid: {e}")
+
+    def open_drawing_tools(self):
+        """
+        Opens a new window with basic drawing tools to create or edit a map.
+        """
+        try:
+            drawing_window = tk.Toplevel(self.root)
+            drawing_window.title("Map Drawing Tools")
+
+            # Canvas for Drawing
+            drawing_canvas = tk.Canvas(drawing_window, bg='white', width=800, height=600)
+            drawing_canvas.pack(fill='both', expand=True)
+
+            # Initialize PIL image to draw on
+            self.drawing_image = Image.new("RGB", (800, 600), "white")
+            self.draw = ImageDraw.Draw(self.drawing_image)
+
+            # Current tool and color
+            self.current_tool = tk.StringVar(value='pencil')
+            self.current_color = '#000000'
+
+            # Toolbar Frame
+            toolbar = ttk.Frame(drawing_window)
+            toolbar.pack(fill='x')
+
+            # Tool Selection
+            tools = ['pencil', 'line', 'rectangle', 'oval']
+            for tool in tools:
+                ttk.Radiobutton(toolbar, text=tool.capitalize(), variable=self.current_tool, value=tool).pack(side='left', padx=2)
+
+            # Color Picker
+            color_button = ttk.Button(toolbar, text="Select Color", command=self.select_color)
+            color_button.pack(side='left', padx=5)
+
+            # Save Button
+            save_button = ttk.Button(toolbar, text="Save Drawing", command=lambda: self.save_drawing(drawing_window))
+            save_button.pack(side='right', padx=5)
+
+            # Bind mouse events
+            drawing_canvas.bind("<ButtonPress-1>", self.start_draw)
+            drawing_canvas.bind("<B1-Motion>", self.draw_motion)
+            drawing_canvas.bind("<ButtonRelease-1>", self.end_draw)
+
+            self.drawing_canvas_widget = drawing_canvas
+            self.drawing_start_x = None
+            self.drawing_start_y = None
+            self.current_drawn_item = None
+        except Exception as e:
+            logger.error(f"Error opening drawing tools: {e}")
+            messagebox.showerror("Error", f"Failed to open drawing tools: {e}")
+
+    def select_color(self):
+        """
+        Opens a color chooser dialog to select drawing color.
+        """
+        try:
+            color = colorchooser.askcolor()[1]
+            if color:
+                self.current_color = color
+        except Exception as e:
+            logger.error(f"Error selecting color: {e}")
+            messagebox.showerror("Error", f"Failed to select color: {e}")
+
+    def start_draw(self, event):
+        """
+        Initializes the drawing action.
+        """
+        try:
+            self.drawing_start_x = event.x
+            self.drawing_start_y = event.y
+            if self.current_tool.get() == 'pencil':
+                self.map_canvas.create_line(event.x, event.y, event.x+1, event.y+1, fill=self.current_color, width=2)
+                self.draw.line([event.x, event.y, event.x+1, event.y+1], fill=self.current_color, width=2)
+        except Exception as e:
+            logger.error(f"Error starting draw: {e}")
+            messagebox.showerror("Error", f"Failed to start drawing: {e}")
+
+    def draw_motion(self, event):
+        """
+        Handles the drawing motion.
+        """
+        try:
+            if self.current_tool.get() == 'pencil':
+                self.map_canvas.create_line(self.drawing_start_x, self.drawing_start_y, event.x, event.y, fill=self.current_color, width=2)
+                self.draw.line([self.drawing_start_x, self.drawing_start_y, event.x, event.y], fill=self.current_color, width=2)
+                self.drawing_start_x = event.x
+                self.drawing_start_y = event.y
+            else:
+                if self.current_drawn_item:
+                    self.map_canvas.delete(self.current_drawn_item)
+                if self.current_tool.get() == 'line':
+                    self.current_drawn_item = self.map_canvas.create_line(self.drawing_start_x, self.drawing_start_y, event.x, event.y, fill=self.current_color, width=2)
+                elif self.current_tool.get() == 'rectangle':
+                    self.current_drawn_item = self.map_canvas.create_rectangle(self.drawing_start_x, self.drawing_start_y, event.x, event.y, outline=self.current_color, width=2)
+                elif self.current_tool.get() == 'oval':
+                    self.current_drawn_item = self.map_canvas.create_oval(self.drawing_start_x, self.drawing_start_y, event.x, event.y, outline=self.current_color, width=2)
+        except Exception as e:
+            logger.error(f"Error during draw motion: {e}")
+            messagebox.showerror("Error", f"Failed during drawing: {e}")
+
+    def end_draw(self, event):
+        """
+        Finalizes the drawing action.
+        """
+        try:
+            if self.current_tool.get() in ['line', 'rectangle', 'oval']:
+                # Draw on the PIL image
+                if self.current_tool.get() == 'line':
+                    self.draw.line([self.drawing_start_x, self.drawing_start_y, event.x, event.y], fill=self.current_color, width=2)
+                elif self.current_tool.get() == 'rectangle':
+                    self.draw.rectangle([self.drawing_start_x, self.drawing_start_y, event.x, event.y], outline=self.current_color, width=2)
+                elif self.current_tool.get() == 'oval':
+                    self.draw.ellipse([self.drawing_start_x, self.drawing_start_y, event.x, event.y], outline=self.current_color, width=2)
+                self.current_drawn_item = None
+        except Exception as e:
+            logger.error(f"Error ending draw: {e}")
+            messagebox.showerror("Error", f"Failed to end drawing: {e}")
+
+    def save_drawing(self, window):
+        """
+        Saves the drawing to the database as a new map.
+        """
+        try:
+            # Prompt for map name and metadata
+            save_dialog = tk.Toplevel(window)
+            save_dialog.title("Save Drawing")
+
+            ttk.Label(save_dialog, text="Name:").grid(row=0, column=0, sticky='w', pady=2, padx=5)
+            name_entry = ttk.Entry(save_dialog, width=50)
+            name_entry.grid(row=0, column=1, pady=2, padx=5)
+
+            # Additional Metadata Fields
+            metadata_fields = ["Campaign", "World", "Location", "Adventure", "Theme", "Description"]
+            metadata_entries = {}
+            for idx, field in enumerate(metadata_fields, start=1):
+                ttk.Label(save_dialog, text=f"{field}:").grid(row=idx, column=0, sticky='w', pady=2, padx=5)
+                entry = ttk.Entry(save_dialog, width=50)
+                entry.grid(row=idx, column=1, pady=2, padx=5)
+                metadata_entries[field.lower()] = entry
+
+            # Save Button
+            save_button = ttk.Button(save_dialog, text="Save", command=lambda: self.save_drawing_to_db(name_entry, metadata_entries, save_dialog))
+            save_button.grid(row=len(metadata_fields)+1, column=1, sticky='e', pady=10, padx=5)
+        except Exception as e:
+            logger.error(f"Error opening save dialog: {e}")
+            messagebox.showerror("Error", f"Failed to open save dialog: {e}")
+
+    def save_drawing_to_db(self, name_entry, metadata_entries, dialog):
+        """
+        Saves the drawing from the drawing window to the database.
+        """
+        try:
+            name = name_entry.get().strip()
+            if not name:
+                messagebox.showwarning("Input Error", "Please provide a name for the map.")
+                return
+
+            # Get metadata
+            campaign = metadata_entries['campaign'].get().strip()
+            world = metadata_entries['world'].get().strip()
+            location = metadata_entries['location'].get().strip()
+            adventure = metadata_entries['adventure'].get().strip()
+            theme = metadata_entries['theme'].get().strip()
+            description = metadata_entries['description'].get().strip()
+
+            # Convert PIL image to bytes
+            img_byte_arr = io.BytesIO()
+            self.drawing_image.save(img_byte_arr, format='PNG')
+            image_data = img_byte_arr.getvalue()
+
+            # Save to database
+            map_id = self.db.add_map(name, image_data, campaign, world, location, adventure, theme, description)
+            messagebox.showinfo("Success", f"Drawing '{name}' saved successfully.")
+            dialog.destroy()
+            self.populate_maps_listbox()
+            # Add to FAISS index
+            new_map = self.db.get_map_by_id(map_id)
+            self.chat_manager.add_record_to_index('maps', new_map)
+        except Exception as e:
+            logger.error(f"Failed to save drawing: {e}")
+            messagebox.showerror("Error", f"Failed to save drawing: {e}")
+
+    def generate_dungeon(self):
+        """
+        Generates and renders a dungeon on the canvas.
+        """
+        try:
+            # Create the dungeon generator and generate a dungeon with 1 level
+            dungeon_generator = DungeonGenerator()
+            dungeon = dungeon_generator.generate_dungeon(num_levels=1)  # Adjust levels if needed
+
+            # Clear the canvas before rendering
+            self.map_canvas.delete("all")
+
+            # Draw the generated dungeon on the canvas
+            self.render_dungeon(dungeon)
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to generate dungeon: {e}")
+
+    def resize_map_canvas(self, event):
+        """
+        Resizes the canvas scroll region based on the image size.
+        """
+        try:
+            if self.map_display_image:
+                self.map_canvas.config(scrollregion=self.map_canvas.bbox(tk.ALL))
+        except Exception as e:
+            logger.error(f"Error resizing map canvas: {e}")
+
+    # --- Closing the Application ---
     def on_closing(self):
         """
         Handles the application closing event by closing the database connection and destroying the root window.
@@ -930,21 +1402,3 @@ class DnDManagerApp:
         except Exception as e:
             logger.error(f"Failed to rebuild FAISS index: {e}")
             messagebox.showerror("Error", f"Failed to rebuild FAISS index: {e}")
-
-
-# Example usage
-if __name__ == "__main__":
-    import sys
-
-    # Ensure that the script is run with the necessary arguments
-    if len(sys.argv) != 2:
-        print("Usage: python ui.py <OpenAI_API_Key>")
-        sys.exit(1)
-
-    api_key = sys.argv[1]
-
-    root = tk.Tk()
-    db = Database()
-    app = DnDManagerApp(root, db, api_key)
-    root.protocol("WM_DELETE_WINDOW", app.on_closing)
-    root.mainloop()

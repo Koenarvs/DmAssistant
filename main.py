@@ -7,11 +7,6 @@ from ui import DnDManagerApp
 from db import Database
 
 def main():
-    """
-    The main entry point for the D&D Manager application.
-    It initializes environment variables, sets up logging, connects to the database,
-    and launches the Tkinter GUI.
-    """
     # Load environment variables from .env file
     load_dotenv()
 

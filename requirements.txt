@@ -1,2 +1,9 @@
-python-dotenv
+tkinter
+tkhtmlview
+markdown
 openai
+faiss-cpu
+numpy
+tiktoken
+python-dotenv
+Pillow

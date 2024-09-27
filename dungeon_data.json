@@ -1,0 +1,92 @@
+{
+    "CHAMBERS_AND_ROOMS_SHAPE_AND_SIZE": [
+        {"chance": 10, "result": "Square, 20' x 20'"},
+        {"chance": 20, "result": "Square, 30' x 30'"},
+        {"chance": 30, "result": "Square, 40' x 40'"},
+        {"chance": 40, "result": "Rectangular, 20' x 30'"},
+        {"chance": 50, "result": "Rectangular, 30' x 50'"},
+        {"chance": 60, "result": "Rectangular, 40' x 60'"},
+        {"chance": 70, "result": "Circular, 30' diameter"},
+        {"chance": 80, "result": "Circular, 50' diameter"},
+        {"chance": 85, "result": "Oval, 30' x 40'"},
+        {"chance": 90, "result": "Oval, 40' x 60'"},
+        {"chance": 95, "result": "Hexagonal, 30' diameter"},
+        {"chance": 100, "result": "Octagonal, 40' diameter"}
+    ],
+    "UNUSUAL_SIZE": [
+        {"chance": 15, "result": "about 500 sq. ft."},
+        {"chance": 25, "result": "about 900 sq. ft."},
+        {"chance": 40, "result": "about 1,300 sq. ft."},
+        {"chance": 50, "result": "about 2,000 sq. ft."},
+        {"chance": 60, "result": "about 2,700 sq. ft."},
+        {"chance": 70, "result": "about 3,400 sq. ft."},
+        {"chance": 100, "result": "roll again and add result to 9-10 above"}
+    ],
+    "CHAMBER_OR_ROOM_CONTENTS": [
+        {"chance": 60, "result": "Empty"},
+        {"chance": 70, "result": "Monster only"},
+        {"chance": 85, "result": "Monster and treasure"},
+        {"chance": 90, "result": "Special"},
+        {"chance": 95, "result": "Trick/Trap"},
+        {"chance": 100, "result": "Treasure"}
+    ],
+    "NUMBER_OF_EXITS": [
+        {"chance": 15, "result": "1"},
+        {"chance": 25, "result": "2"},
+        {"chance": 35, "result": "3"},
+        {"chance": 45, "result": "4"},
+        {"chance": 100, "result": "1d4+4"}
+    ],
+    "EXIT_LOCATION": [
+        {"chance": 35, "result": "opposite wall"},
+        {"chance": 60, "result": "left wall"},
+        {"chance": 85, "result": "right wall"},
+        {"chance": 100, "result": "same wall"}
+    ],
+    "EXIT_DIRECTION": [
+        {"chance": 40, "result": "straight ahead"},
+        {"chance": 55, "result": "45 degrees left/right"},
+        {"chance": 100, "result": "90 degrees left/right"}
+    ],
+    "MONSTER_ENCOUNTERS": [
+        {"chance": 20, "result": "Goblin"},
+        {"chance": 40, "result": "Orc"},
+        {"chance": 60, "result": "Skeleton"},
+        {"chance": 80, "result": "Zombie"},
+        {"chance": 100, "result": "Dragon"}
+    ],
+    "TREASURE_TYPE": [
+        {"chance": 25, "result": "Coins"},
+        {"chance": 50, "result": "Gems"},
+        {"chance": 75, "result": "Jewelry"},
+        {"chance": 100, "result": "Magic Item"}
+    ],
+    "TREASURE_CONTAINER": [
+        {"chance": 20, "result": "Bags"},
+        {"chance": 40, "result": "Sacks"},
+        {"chance": 60, "result": "Small Coffers"},
+        {"chance": 80, "result": "Chests"},
+        {"chance": 100, "result": "Huge Chests"}
+    ],
+    "TREASURE_GUARD": [
+        {"chance": 20, "result": "Contact poison on container"},
+        {"chance": 40, "result": "Contact poison on treasure"},
+        {"chance": 60, "result": "Poisoned needles in lock"},
+        {"chance": 80, "result": "Poisoned needles in handles"},
+        {"chance": 100, "result": "Spring darts firing from front of container"}
+    ],
+    "TRAPS": [
+        {"chance": 20, "result": "Pit trap"},
+        {"chance": 40, "result": "Spear trap"},
+        {"chance": 60, "result": "Gas trap"},
+        {"chance": 80, "result": "Dart trap"},
+        {"chance": 100, "result": "Rolling boulder trap"}
+    ],
+    "SPECIAL_FEATURES": [
+        {"chance": 20, "result": "Fountain"},
+        {"chance": 40, "result": "Statue"},
+        {"chance": 60, "result": "Magic mouth"},
+        {"chance": 80, "result": "Teleporter"},
+        {"chance": 100, "result": "Talking door"}
+    ]
+}
