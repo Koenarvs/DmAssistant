@@ -21,11 +21,18 @@ def main():
     )
     logger = logging.getLogger(__name__)
 
-    # Check for OpenAI API Key
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-    if not openai_api_key:
-        logger.error("OPENAI_API_KEY environment variable not set.")
-        print("Error: OPENAI_API_KEY environment variable not set. Please set it in the .env file.")
+    # Check for OpenAI API Key (commented out)
+    # openai_api_key = os.getenv("OPENAI_API_KEY")
+    # if not openai_api_key:
+    #     logger.error("OPENAI_API_KEY environment variable not set.")
+    #     print("Error: OPENAI_API_KEY environment variable not set. Please set it in the .env file.")
+    #     return
+
+    # Check for Anthropic API Key
+    anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not anthropic_api_key:
+        logger.error("ANTHROPIC_API_KEY environment variable not set.")
+        print("Error: ANTHROPIC_API_KEY environment variable not set. Please set it in the .env file.")
         return
 
     # Initialize Database
@@ -38,7 +45,7 @@ def main():
 
     # Initialize Tkinter Root
     root = tk.Tk()
-    app = DnDManagerApp(root, db, openai_api_key)  # Pass API key here
+    app = DnDManagerApp(root, db, anthropic_api_key)  # Pass Anthropic API key here
     root.protocol("WM_DELETE_WINDOW", app.on_closing)
     root.mainloop()
 
