@@ -2,6 +2,7 @@
 import os
 import logging
 from openai import OpenAI
+from anthropic import Anthropic
 import faiss
 import numpy as np
 from db import Database
@@ -10,26 +11,23 @@ import tiktoken
 logger = logging.getLogger(__name__)
 
 class ChatManager:
-    """
-    Manages interactions with OpenAI's ChatGPT and FAISS for semantic search and response generation.
-    Handles the indexing of world building, session notes, and NPC data.
-    """
-    def __init__(self, db, api_key, faiss_index_path='faiss.index', record_ids_path='record_ids.npy'):
-        """
-        Initializes the ChatManager with database connection, OpenAI client, and FAISS index.
-        """
+    def __init__(self, db, openai_api_key, anthropic_api_key, faiss_index_path='faiss.index', record_ids_path='record_ids.npy'):
         self.db = db
         self.faiss_index_path = faiss_index_path
         self.record_ids_path = record_ids_path
         self.dimension = 1536  # Dimension size for OpenAI's 'text-embedding-3-small'
         self.index = faiss.IndexFlatL2(self.dimension)
         self.record_ids = []
-        self.client = OpenAI(api_key=api_key)  # Instantiate OpenAI client
+        self.openai_client = OpenAI(api_key=openai_api_key)
+        self.anthropic_client = Anthropic(api_key=anthropic_api_key)
         self.tokenizer = tiktoken.get_encoding("cl100k_base")
 
-        if not self.client.api_key:
+        if not openai_api_key:
             logger.error("OpenAI API key not found. Please set OPENAI_API_KEY in the environment variables.")
             raise ValueError("OpenAI API key not found.")
+        if not anthropic_api_key:
+            logger.error("Anthropic API key not found. Please set ANTHROPIC_API_KEY in the environment variables.")
+            raise ValueError("Anthropic API key not found.")
 
         self.load_faiss_index()
 
@@ -158,7 +156,7 @@ class ChatManager:
         Retrieves the embedding for a given text using OpenAI's Embedding API.
         """
         try:
-            response = self.client.embeddings.create(
+            response = self.openai_client.embeddings.create(
                 input=text,
                 model="text-embedding-3-small"
             )
@@ -200,7 +198,7 @@ class ChatManager:
         except Exception as e:
             logger.error(f"Error adding record to FAISS index: {e}")
 
-    def search_faiss(self, query, top_k=5):
+    def search_faiss(self, query, top_k=15):  # Increased from 5 to 15
         """
         Searches the FAISS index for the most relevant records based on the query.
         Returns a list of tuples containing record type, record data, and chunk index.
@@ -231,6 +229,47 @@ class ChatManager:
         except Exception as e:
             logger.error(f"Error searching FAISS index: {e}")
             return []
+
+    def refine_prompt(self, user_query, faiss_results):
+        """
+        Uses Claude-3-Haiku to refine the prompt based on the user query and FAISS results.
+        """
+        try:
+            context = ""
+            for record_type, record, chunk_id in faiss_results:
+                if record_type == 'world_building':
+                    text = f"World Building - Title: {record[1]}\nContent: {record[2]}"
+                elif record_type == 'session_notes':
+                    text = f"Session Notes - Date: {record[1]}\nNotes: {record[2]}"
+                elif record_type == 'npc':
+                    text = f"NPC - {record[1]}:\n{self.construct_npc_text(record)}"
+                
+                chunks = self.chunk_text(text)
+                if chunk_id < len(chunks):
+                    context += f"{chunks[chunk_id]}\n\n"
+
+            if not context:
+                context = "No relevant information found in the database."
+
+            system_message = "You are an AI assistant tasked with refining prompts for a D&D game management system. Your job is to analyze the user's query and the provided context, then create a concise and relevant prompt that captures the essential information needed to answer the query effectively."
+            user_message = f"User Query: {user_query}\n\nContext from FAISS:\n{context}\n\nPlease create a refined prompt that includes only the most relevant information from the context to answer the user's query. Remove any redundant or irrelevant information."
+
+            response = self.anthropic_client.messages.create(
+                model="claude-3-haiku-20240307",
+                max_tokens=1024,
+                temperature=0.7,
+                system=system_message,
+                messages=[
+                    {"role": "user", "content": user_message}
+                ]
+            )
+
+            refined_prompt = response.content[0].text.strip()
+            logger.info("Generated refined prompt using Claude-3-Haiku.")
+            return refined_prompt
+        except Exception as e:
+            logger.error(f"Error refining prompt: {e}")
+            return user_query  # Fallback to original query if refinement fails
 
     def rebuild_faiss_index(self):
         """
@@ -299,42 +338,41 @@ class ChatManager:
 
     def generate_response(self, prompt):
         """
-        Generates a response from ChatGPT based on the user's prompt and relevant context retrieved via FAISS.
+        Generates a response from Claude 3.5 Sonnet based on the refined prompt.
         """
         try:
-            relevant_records = self.search_faiss(prompt)
-            context = ""
-            for record_type, record, chunk_id in relevant_records:
-                if record_type == 'world_building':
-                    text = f"World Building - Title: {record[1]}\nContent: {record[2]}"
-                elif record_type == 'session_notes':
-                    text = f"Session Notes - Date: {record[1]}\nNotes: {record[2]}"
-                elif record_type == 'npc':
-                    text = f"NPC - {record[1]}:\n{self.construct_npc_text(record)}"
-                
-                chunks = self.chunk_text(text)
-                if chunk_id < len(chunks):
-                    context += f"{chunks[chunk_id]}\n\n"
+            faiss_results = self.search_faiss(prompt)
+            refined_prompt = self.refine_prompt(prompt, faiss_results)
 
-            if not context:
-                context = "No relevant information found in the database."
+            system_message = "You are a helpful assistant for managing a D&D game. Use the provided context to answer the user's query thoroughly and accurately."
 
-            messages = [
-                {"role": "system", "content": "You are a helpful assistant for managing a D&D game."},
-                {"role": "system", "content": f"Here is some relevant information:\n{context}"},
-                {"role": "user", "content": prompt}
-            ]
-
-            response = self.client.chat.completions.create(
-                model="gpt-4",
-                messages=messages,
-                max_tokens=500,
-                n=1,
-                stop=None,
+            response = self.anthropic_client.messages.create(
+                model="claude-3-5-sonnet-20240620",
+                max_tokens=8192,
                 temperature=0.7,
+                system=system_message,
+                messages=[
+                    {"role": "user", "content": refined_prompt}
+                ]
             )
-            logger.info("Generated response from ChatGPT.")
-            return response.choices[0].message.content.strip()
+
+            logger.info("Generated response from Claude 3.5 Sonnet.")
+            return response.content[0].text.strip()
         except Exception as e:
             logger.error(f"Error generating response: {e}")
             return "I'm sorry, but I encountered an error while trying to generate a response. Please try again later."
+
+            # messages = [
+            #     {"role": "system", "content": "You are a helpful assistant for managing a D&D game."},
+            #     {"role": "system", "content": f"Here is some relevant information:\n{context}"},
+            #     {"role": "user", "content": prompt}
+            # ]
+
+            # response = self.client.chat.completions.create(
+            #     model="gpt-4",
+            #     messages=messages,
+            #     max_tokens=500,
+            #     n=1,
+            #     stop=None,
+            #     temperature=0.7,
+            # )

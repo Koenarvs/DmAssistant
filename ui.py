@@ -24,19 +24,15 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 class DnDManagerApp:
-    """
-    The main user interface for the D&D Manager application.
-    It includes tabs for ChatGPT interactions, World Building, Session Notes, NPC Management, and Maps.
-    """
-    def __init__(self, root, db, api_key):
+    def __init__(self, root, db, openai_api_key, anthropic_api_key):
         """
-        Initializes the application with the root Tkinter window, database connection, and API key.
+        Initializes the application with the root Tkinter window, database connection, and API keys.
         """
         self.root = root
         self.root.title("D&D Manager with ChatGPT and FAISS")
         self.db = db
         try:
-            self.chat_manager = ChatManager(self.db, api_key)  # Pass API key here
+            self.chat_manager = ChatManager(self.db, openai_api_key, anthropic_api_key)  # Pass both API keys here
         except Exception as e:
             logger.error(f"Failed to initialize ChatManager: {e}")
             messagebox.showerror("Initialization Error", f"Failed to initialize ChatManager: {e}")
