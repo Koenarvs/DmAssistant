@@ -158,7 +158,7 @@ class ChatManager:
         try:
             response = self.openai_client.embeddings.create(
                 input=text,
-                model="text-embedding-3-small"
+                model="text-embedding-ada-002"
             )
             embedding = response.data[0].embedding
             return embedding
@@ -243,20 +243,23 @@ class ChatManager:
                     text = f"Session Notes - Date: {record[1]}\nNotes: {record[2]}"
                 elif record_type == 'npc':
                     text = f"NPC - {record[1]}:\n{self.construct_npc_text(record)}"
-                
-                chunks = self.chunk_text(text)
-                if chunk_id < len(chunks):
-                    context += f"{chunks[chunk_id]}\n\n"
+                context += f"{text}\n\n"
 
             if not context:
                 context = "No relevant information found in the database."
 
-            system_message = "You are an AI assistant tasked with refining prompts for a D&D game management system. Your job is to analyze the user's query and the provided context, then create a concise and relevant prompt that captures the essential information needed to answer the query effectively."
-            user_message = f"User Query: {user_query}\n\nContext from FAISS:\n{context}\n\nPlease create a refined prompt that includes only the most relevant information from the context to answer the user's query. Remove any redundant or irrelevant information."
+            system_message = (
+                "You are an AI assistant that refines user queries for a D&D game management system. "
+                "Given the user's query and context from a FAISS search, produce a concise and focused prompt. "
+                "Remove repetitive information and less relevant details. "
+                "The refined prompt should capture the essence of the user's query and the most pertinent context."
+            )
+
+            user_message = f"User Query: {user_query}\n\nFAISS Context:\n{context}\n\nRefined Prompt:"
 
             response = self.anthropic_client.messages.create(
                 model="claude-3-haiku-20240307",
-                max_tokens=1024,
+                max_tokens=4096,
                 temperature=0.7,
                 system=system_message,
                 messages=[
@@ -336,24 +339,37 @@ class ChatManager:
             logger.error(f"Error rebuilding FAISS index: {e}")
             raise
 
-    def generate_response(self, prompt):
-        """
-        Generates a response from Claude 3.5 Sonnet based on the refined prompt.
-        """
+    def generate_response(self, prompt, chat_history):
         try:
             faiss_results = self.search_faiss(prompt)
             refined_prompt = self.refine_prompt(prompt, faiss_results)
 
-            system_message = "You are a helpful assistant for managing a D&D game. Use the provided context to answer the user's query thoroughly and accurately."
+            system_message = (
+                "You are a helpful assistant for managing a D&D game. "
+                "Use the provided conversation history and refined prompt to answer the user's query thoroughly and accurately."
+            )
 
+            # Build the messages list
+            messages = []
+
+            # Include the conversation history
+            for sender, message in chat_history:
+                role = "assistant" if sender == "ChatGPT" else "user"
+                messages.append({"role": role, "content": message})
+
+            # Add the refined prompt as the user's latest message
+            messages.append({"role": "user", "content": refined_prompt})
+
+            # Log the messages for debugging
+            logger.debug(f"Messages sent to LLM:\n{messages}")
+
+            # Call the Anthropic API using messages.create
             response = self.anthropic_client.messages.create(
                 model="claude-3-5-sonnet-20240620",
-                max_tokens=8192,
+                max_tokens=8192,  # Maximum token limit for Claude 3.5 Sonnet
                 temperature=0.7,
                 system=system_message,
-                messages=[
-                    {"role": "user", "content": refined_prompt}
-                ]
+                messages=messages
             )
 
             logger.info("Generated response from Claude 3.5 Sonnet.")
@@ -361,6 +377,7 @@ class ChatManager:
         except Exception as e:
             logger.error(f"Error generating response: {e}")
             return "I'm sorry, but I encountered an error while trying to generate a response. Please try again later."
+
 
             # messages = [
             #     {"role": "system", "content": "You are a helpful assistant for managing a D&D game."},

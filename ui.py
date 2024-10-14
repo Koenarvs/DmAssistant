@@ -1,7 +1,8 @@
 # ui.py
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, colorchooser
-from tkhtmlview import HTMLLabel  # Using tkhtmlview for HTML rendering
+from chat_tab import ChatTab  # Import the updated ChatTab
+from tkhtmlview import HTMLLabel
 from PIL import Image, ImageTk, ImageDraw
 from chat import ChatManager
 from db import Database
@@ -84,58 +85,55 @@ class DnDManagerApp:
         try:
             tab_control = ttk.Notebook(self.root)
 
-            # Chat Tab
-            self.chat_tab = ttk.Frame(tab_control)
+            # --- Integrate the Updated Chat Tab ---
+            self.chat_tab = ChatTab(tab_control, self.chat_manager)
             tab_control.add(self.chat_tab, text='ChatGPT')
 
-            # World Building Tab
+            # --- Other Tabs ---
             self.world_tab = ttk.Frame(tab_control)
             tab_control.add(self.world_tab, text='World Building')
 
-            # Session Notes Tab
             self.session_tab = ttk.Frame(tab_control)
             tab_control.add(self.session_tab, text='Session Notes')
 
-            # NPC Management Tab
             self.npc_tab = ttk.Frame(tab_control)
             tab_control.add(self.npc_tab, text='NPC Management')
 
-            # Maps Tab
             self.maps_tab = ttk.Frame(tab_control)
             tab_control.add(self.maps_tab, text='Maps')
 
             tab_control.pack(expand=1, fill='both')
 
-            self.create_chat_tab()
+            # Initialize other tabs
             self.create_world_tab()
             self.create_session_tab()
             self.create_npc_tab()
-            self.create_maps_tab()  # Initialize Maps Tab
+            self.create_maps_tab()
         except Exception as e:
             logger.error(f"Error during widget creation: {e}")
             raise
 
-    # --- Chat Tab ---
-    def create_chat_tab(self):
-        """
-        Sets up the ChatGPT interaction interface.
-        """
-        try:
-            # Chat History using HTMLLabel for rich text rendering
-            self.chat_history = HTMLLabel(self.chat_tab, html="<h2>Chat History</h2><hr>", background="white")
-            self.chat_history.pack(padx=10, pady=10, fill='both', expand=True)
+    # --- Remove or Comment Out the Old Chat Tab Creation ---
+    # def create_chat_tab(self):
+    #     """
+    #     Sets up the ChatGPT interaction interface.
+    #     """
+    #     try:
+    #         # Chat History using HTMLLabel for rich text rendering
+    #         self.chat_history = HTMLLabel(self.chat_tab, html="<h2>Chat History</h2><hr>", background="white")
+    #         self.chat_history.pack(padx=10, pady=10, fill='both', expand=True)
 
-            # Entry Field
-            self.chat_entry = tk.Entry(self.chat_tab)
-            self.chat_entry.pack(padx=10, pady=(0, 10), fill='x')
-            self.chat_entry.bind("<Return>", self.send_chat)
+    #         # Entry Field
+    #         self.chat_entry = tk.Entry(self.chat_tab)
+    #         self.chat_entry.pack(padx=10, pady=(0, 10), fill='x')
+    #         self.chat_entry.bind("<Return>", self.send_chat)
 
-            # Send Button
-            send_button = tk.Button(self.chat_tab, text="Send", command=self.send_chat)
-            send_button.pack(padx=10, pady=(0, 10))
-        except Exception as e:
-            logger.error(f"Error creating Chat Tab: {e}")
-            raise
+    #         # Send Button
+    #         send_button = tk.Button(self.chat_tab, text="Send", command=self.send_chat)
+    #         send_button.pack(padx=10, pady=(0, 10))
+    #     except Exception as e:
+    #         logger.error(f"Error creating Chat Tab: {e}")
+    #         raise
 
     def send_chat(self, event=None):
         """
