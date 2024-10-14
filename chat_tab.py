@@ -39,18 +39,32 @@ class ChatTab(ttk.Frame):
         self.chat_history.tag_configure("ChatGPT", foreground="green", font=("Helvetica", 10, "bold"))
         self.chat_history.tag_configure("message", font=("Helvetica", 10))
 
-        # Initialize with a header
-        # self.append_text("Chat History\n", "You")
-        # self.append_text("------------------------------\n", "You")
+        # Create a frame for the input area
+        input_frame = ttk.Frame(self)
+        input_frame.pack(padx=10, pady=(0, 10), fill='x')
 
-        # Entry widget for user input
-        self.chat_entry = tk.Entry(self)
-        self.chat_entry.pack(padx=10, pady=(0,10), fill='x')
+        # Text widget for user input with initial height of 5 rows
+        self.chat_entry = tk.Text(input_frame, height=5, wrap='word')
+        self.chat_entry.pack(side='left', fill='x', expand=True)
         self.chat_entry.bind("<Return>", self.send_chat)
+        self.chat_entry.bind("<Shift-Return>", self.new_line)
+
+        # Scrollbar for input Text widget
+        input_scrollbar = ttk.Scrollbar(input_frame, orient='vertical', command=self.chat_entry.yview)
+        input_scrollbar.pack(side='right', fill='y')
+        self.chat_entry.config(yscrollcommand=input_scrollbar.set)
+
+        # Button frame for Send and Clear buttons
+        button_frame = ttk.Frame(self)
+        button_frame.pack(padx=10, pady=(0, 10), fill='x')
 
         # Send button
-        send_button = tk.Button(self, text="Send", command=self.send_chat)
-        send_button.pack(padx=10, pady=(0,10))
+        send_button = tk.Button(button_frame, text="Send", command=self.send_chat)
+        send_button.pack(side='left', padx=(0, 5))
+
+        # Clear History button
+        clear_button = tk.Button(button_frame, text="Clear History", command=self.clear_chat_history)
+        clear_button.pack(side='left')
 
     def create_context_menu(self):
         """Creates a right-click context menu for the chat history."""
@@ -87,16 +101,16 @@ class ChatTab(ttk.Frame):
         """Append message to the chat history Text widget with formatting."""
         self.chat_history.configure(state='normal')
         self.chat_history.insert('end', f"{sender}: ", sender)
-        self.chat_history.insert('end', f"{message}\n", "message")
+        self.chat_history.insert('end', f"{message}\n\n", "message")  # Added an extra \n for blank line
         self.chat_history.configure(state='disabled')
         self.chat_history.see('end')  # Scroll to the end
 
     def send_chat(self, event=None):
         try:
-            user_input = self.chat_entry.get()
-            if not user_input.strip():
-                return
-            self.chat_entry.delete(0, tk.END)
+            user_input = self.chat_entry.get("1.0", "end-1c").strip()
+            if not user_input:
+                return "break"
+            self.chat_entry.delete("1.0", tk.END)
             self.chat_messages.append(("You", user_input))
             self.append_text(user_input, "You")
 
@@ -106,3 +120,19 @@ class ChatTab(ttk.Frame):
         except Exception as e:
             logger.error(f"Error during send_chat: {e}")
             tk.messagebox.showerror("Chat Error", f"An error occurred while sending the chat: {e}")
+        return "break"
+
+    def new_line(self, event):
+        """Allows multi-line input when Shift+Enter is pressed"""
+        return None  # This allows the default behavior of inserting a newline
+
+    def clear_chat_history(self):
+        """Clears the chat history from both the display and the stored messages."""
+        confirm = messagebox.askyesno("Clear Chat History", "Are you sure you want to clear the chat history?")
+        if confirm:
+            self.chat_history.configure(state='normal')
+            self.chat_history.delete("1.0", tk.END)
+            self.chat_history.configure(state='disabled')
+            self.chat_messages.clear()
+            logger.info("Chat history cleared.")
+
